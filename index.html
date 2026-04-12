@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fundu 💖 Cinematic</title>
+
+<!-- ✅ CORRECT GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+<style>
+body{
+    margin:0;
+    overflow:hidden;
+    font-family:'Poppins',sans-serif;
+    background:#000;
+    color:white;
+}
+
+/* ✅ TAP START SCREEN */
+#tapStart {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background:black;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:999999;
+    cursor:pointer;
+    animation: fadeIn 1s ease-out;
+}
+#tapBox { text-align:center; animation: popIn 1.2s; }
+#tapText { 
+    font-size:26px;
+    margin-bottom:20px;
+    animation: glowText 2s infinite alternate;
+}
+#tapBtn{
+    background:#ff2fbf;
+    padding:14px 35px;
+    border-radius:40px;
+    font-size:20px;
+    cursor:pointer;
+    box-shadow:0 0 18px #ff53d8;
+    animation:pulseBtn 1.5s infinite;
+}
+#tapArrow{
+    font-size:32px;
+    margin-top:25px;
+    animation:arrowBounce 1s infinite;
+}
+
+/* Animations */
+@keyframes popIn{from{scale:0.7;opacity:0;}to{scale:1;opacity:1;}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes pulseBtn{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.1);}
+    100%{transform:scale(1);}
+}
+@keyframes glowText{
+    0%{text-shadow:0 0 8px #ff54db;}
+    100%{text-shadow:0 0 18px #ff96f0;}
+}
+@keyframes arrowBounce{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(10px);}
+    100%{transform:translateY(0);}
+}
+
+/* Background Video */
+#bgVideo {
+    position: fixed;
+    top: 50%; left: 50%;
+    min-width: 100%; min-height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index:-1;
+}
+
+/* Pink Overlay */
+#pinkOverlay {
+    position: fixed;
+    width: 100%; height: 100%;
+    background: radial-gradient(circle, rgba(255,120,200,0.25), rgba(0,0,0,0.5));
+    z-index:0;
+}
+
+/* Sparkles */
+.sparkle{
+    position:fixed;
+    width:4px; height:4px;
+    background:white;
+    border-radius:50%;
+    animation:floatUp 5s linear forwards;
+}
+@keyframes floatUp{
+    to{transform:translateY(-120vh);opacity:0;}
+}
+
+/* Content */
+.container{
+    text-align:center;
+    margin-top:70px;
+    position:relative;
+    z-index:10;
+}
+
+#chatArea{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.chat{
+    background:#dcf8c6;
+    color:black;
+    padding:10px 14px;
+    margin:10px 0;
+    border-radius:20px;
+    opacity:0;
+    transform:translateY(30px);
+    font-size:17px;
+}
+
+/* Cake */
+#cake{
+    font-size:120px;
+    display:none;
+    opacity:0;
+    cursor:pointer;
+    margin-top:20px;
+}
+
+/* Popup */
+#popupOverlay {
+    position: fixed;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.75);
+    top: 0; left: 0;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:2000;
+}
+#popupBox{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    text-align:center;
+    color:#ff4da6;
+    transform:scale(0.6);
+    opacity:0;
+    box-shadow:0 0 25px #ff80e6;
+}
+#popupBtn{
+    margin-top:15px;
+    padding:10px 22px;
+    background:#ff4da6;
+    color:white;
+    border:none;
+    border-radius:30px;
+    font-size:18px;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ✅ TAP SCREEN -->
+<div id="tapStart">
+    <div id="tapBox">
+        <div id="tapText">✨ Tap to Begin the Magic ✨</div>
+        <div id="tapBtn">Start 💖</div>
+        <div id="tapArrow">⬇️</div>
+    </div>
+</div>
+
+<!-- Background Video -->
+<video id="bgVideo" autoplay muted loop playsinline>
+    <source src="video2.mp4" type="video/mp4">
+</video>
+
+<div id="pinkOverlay"></div>
+
+<!-- Music -->
+<audio id="music" autoplay loop muted>
+    <source src="music1.mpeg" type="audio/mpeg">
+</audio>
+
+<div class="container">
+    <h1>Happy Birthday Fundu 💖</h1>
+    <div id="chatArea"></div>
+    <div id="cake">🎂</div>
+</div>
+
+<!-- Popup -->
+<div id="popupOverlay">
+    <div id="popupBox">
+        <p>Happyyyy Birthday 💖<br>You are amazing ✨</p>
+        <button id="popupBtn">Next Surprise 💕</button>
+    </div>
+</div>
+
+<script>
+
+/* ✅ STORY STARTS ONLY AFTER TAP */
+let started = false;
+
+function begin(){
+    if(started) return;
+    started = true;
+
+    tapStart.style.opacity = 0;
+    setTimeout(()=>tapStart.style.display="none",500);
+
+    // ✅ Start music
+    music.volume = 0;
+    music.play().catch(()=>{});
+    setTimeout(()=> {
+        music.muted = false;
+        gsap.to(music, { volume:1, duration:2 });
+    },500);
+
+    startSparkles();
+    startChat();
+}
+
+tapStart.addEventListener("click", begin);
+tapBtn.addEventListener("click", begin);
+
+/* ✅ Sparkles */
+function startSparkles(){
+    setInterval(()=>{
+        let s=document.createElement("div");
+        s.className="sparkle";
+        s.style.left=Math.random()*100+"vw";
+        s.style.top="100vh";
+        document.body.appendChild(s);
+        setTimeout(()=>s.remove(),5000);
+    },180);
+}
+
+/* ✅ Chat System */
+const msgs = [
+"Hi Fundu 🎀",
+"Today is your special day 💖",
+"You deserve everything ✨",
+"Stay happy always 🌸",
+"Something for you 🎂, click it to cut 🔪"
+];
+
+let i=0;
+
+function startChat(){
+    setInterval(()=>{
+        if(i < msgs.length){
+            let b=document.createElement("div");
+            b.className="chat";
+            b.innerText=msgs[i];
+            chatArea.appendChild(b);
+            gsap.to(b,{opacity:1,y:0});
+            i++;
+
+            if(i === msgs.length){
+                setTimeout(showCake,2000);
+            }
+        }
+    },2000);
+}
+
+/* ✅ Cake Appears */
+function showCake(){
+    cake.style.display="block";
+    gsap.to(cake,{opacity:1,scale:1.1});
+}
+
+/* ✅ Popup */
+cake.onclick = () =>{
+    popupOverlay.style.display="flex";
+    gsap.to("#popupBox",{opacity:1,scale:1,duration:0.7});
+}
+
+/* ✅ Next Page */
+popupBtn.onclick = ()=>{
+    window.location.href = "photo_wall_page.html";
+};
+
+</script>
+
+</body>
+</html>
