@@ -255,92 +255,104 @@ button{
 
 <script>
 
+/* GET ELEMENTS */
+const start = document.getElementById("start");
+const music = document.getElementById("music");
+const scene = document.getElementById("scene");
+const viewer = document.getElementById("viewer");
+const vimg = document.getElementById("vimg");
+const giftBtn = document.getElementById("gift-btn");
+const popup = document.getElementById("popup");
+
 /* START */
-start.onclick=()=>{
-music.play();
-start.style.display="none";
+start.onclick = () => {
+    music.play();
+    start.style.display = "none";
 };
 
 /* ROPE */
-let rope=document.createElement("div");
-rope.className="string";
+let rope = document.createElement("div");
+rope.className = "string";
 scene.appendChild(rope);
 
 /* LIGHTS */
 for(let i=0;i<25;i++){
-let b=document.createElement("div");
-b.className="bulb";
-b.style.left=(5+i*3.5)+"%";
-b.style.top="calc(20% + 15px)";
-scene.appendChild(b);
+    let b=document.createElement("div");
+    b.className="bulb";
+    b.style.left=(5+i*3.5)+"%";
+    b.style.top="calc(20% + 15px)";
+    scene.appendChild(b);
 }
 
-/* RANDOM POSITIONS */
+/* POSITIONS */
 let positions=[
-{left:"8%",top:"32%"},
-{left:"25%",top:"40%"},
-{left:"45%",top:"30%"},
-{left:"65%",top:"38%"},
-{left:"80%",top:"32%"}
+    {left:"8%",top:"32%"},
+    {left:"25%",top:"40%"},
+    {left:"45%",top:"30%"},
+    {left:"65%",top:"38%"},
+    {left:"80%",top:"32%"}
 ];
 
 /* PHOTOS */
 for(let i=0;i<5;i++){
-let p=document.createElement("div");
-p.className="photo";
+    let p=document.createElement("div");
+    p.className="photo";
 
-let pos=positions[i];
-p.style.left=pos.left;
-p.style.top=pos.top;
+    let pos=positions[i];
+    p.style.left=pos.left;
+    p.style.top=pos.top;
 
-p.innerHTML=`
-<div class="clip"></div>
-<img src="photo${i+1}.jpg">
-`;
+    p.innerHTML=`
+    <div class="clip"></div>
+    <img src="photo${i+1}.jpg">
+    `;
 
-scene.appendChild(p);
+    scene.appendChild(p);
 
-p.onclick=()=>{
-vimg.src=p.querySelector("img").src;
-viewer.style.opacity=1;
-viewer.style.pointerEvents="auto";
-};
+    p.onclick=()=>{
+        vimg.src=p.querySelector("img").src;
+        viewer.style.opacity=1;
+        viewer.style.pointerEvents="auto";
+    };
 }
 
-/* VIEWER CLOSE */
+/* CLOSE VIEWER */
 viewer.onclick=()=>{
-viewer.style.opacity=0;
-viewer.style.pointerEvents="none";
+    viewer.style.opacity=0;
+    viewer.style.pointerEvents="none";
 };
 
 /* FLOWERS */
 setInterval(()=>{
-let f=document.createElement("div");
-f.innerHTML=["🌸","🌼","🌺","💮"][Math.floor(Math.random()*4)];
-f.style.position="fixed";
-f.style.left=Math.random()*100+"%";
-f.style.top="-10px";
-f.style.fontSize=(20+Math.random()*20)+"px";
-f.style.animation="fall 6s linear forwards";
-document.body.appendChild(f);
-setTimeout(()=>f.remove(),6000);
+    let f=document.createElement("div");
+    f.innerHTML=["🌸","🌼","🌺","💮"][Math.floor(Math.random()*4)];
+    f.style.position="fixed";
+    f.style.left=Math.random()*100+"%";
+    f.style.top="-10px";
+    f.style.fontSize=(20+Math.random()*20)+"px";
+    f.style.animation="fall 6s linear forwards";
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),6000);
 },400);
 
 /* SPARKLES */
 setInterval(()=>{
-let s=document.createElement("div");
-s.className="random-sparkle";
-s.style.left=Math.random()*100+"%";
-s.style.bottom="0";
-document.body.appendChild(s);
-setTimeout(()=>s.remove(),3000);
+    let s=document.createElement("div");
+    s.className="random-sparkle";
+    s.style.left=Math.random()*100+"%";
+    s.style.bottom="0";
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),3000);
 },150);
 
-/* POPUP */
-giftBtn.onclick=()=>popup.style.display="flex";
+/* BUTTON FIX */
+giftBtn.onclick = () => {
+    popup.style.display = "flex";
+};
 
+/* NEXT PAGE */
 function goNext(){
-window.location.href="gift.html";
+    window.location.href = "gift.html";
 }
 
 </script>
