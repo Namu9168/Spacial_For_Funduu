@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Romantic Memory Wall</title>
+<title>Forever Moments 💖✨</title>
 
 <style>
 body{
@@ -15,7 +15,7 @@ body{
     font-family:'Poppins', sans-serif;
 }
 
-/* Start Screen */
+/* START SCREEN */
 #start{
     position:fixed;
     width:100%;
@@ -25,19 +25,38 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    font-size:28px;
+    font-size:20px;
+    text-align:center;
     cursor:pointer;
     z-index:9999;
+    padding:20px;
 }
 
-/* Scene */
+/* TITLE */
+#title{
+    position:fixed;
+    top:10px;
+    width:100%;
+    text-align:center;
+    font-size:26px;
+    color:#fff;
+    text-shadow:0 0 20px #ff80df, 0 0 40px #ff3ecf;
+    animation:glowTitle 2s infinite alternate;
+    z-index:50;
+}
+@keyframes glowTitle{
+    from{opacity:0.8;}
+    to{opacity:1;}
+}
+
+/* SCENE */
 #scene{
     position:relative;
     width:100%;
     height:100vh;
 }
 
-/* Rope */
+/* ROPE */
 .string{
     position:absolute;
     width:90%;
@@ -46,87 +65,89 @@ body{
     top:20%;
     border-bottom:4px solid #ffd4ff;
     border-radius:0 0 70% 70%;
-    box-shadow:0 0 20px #ffb2f9, 0 0 40px #ff7be2;
+    box-shadow:0 0 20px #ffb2f9;
 }
 
-/* Lights */
+/* LIGHTS */
 .bulb{
     position:absolute;
-    width:14px;
-    height:14px;
+    width:12px;
+    height:12px;
     border-radius:50%;
-    background:radial-gradient(circle,#fff,#ffc6ff);
-    box-shadow:0 0 18px #ff8ae6;
-    animation: blink 1.5s infinite alternate;
+    background:white;
+    box-shadow:0 0 15px pink;
+    animation:blink 1.5s infinite alternate;
 }
 @keyframes blink{
-    0%{opacity:0.5; transform:scale(0.8);}
-    100%{opacity:1; transform:scale(1.2);}
+    0%{opacity:0.5;}
+    100%{opacity:1;}
 }
 
-/* Photos */
+/* PHOTOS */
 .photo{
-    width:150px;
+    width:min(120px, 28vw);
     background:white;
-    padding:10px 10px 20px;
+    padding:8px 8px 16px;
     border-radius:10px;
     position:absolute;
-    box-shadow:0 10px 35px rgba(255,140,200,0.7);
+    box-shadow:0 10px 25px rgba(255,140,200,0.6);
     animation:swing 4s infinite ease-in-out;
     transform-origin:top center;
     cursor:pointer;
-    transition:0.3s;
 }
 .photo:hover{
-    transform: scale(1.15);
-    box-shadow: 0 0 50px hotpink;
+    transform:scale(1.1);
+    box-shadow:0 0 40px hotpink;
 }
+
 .photo img{
     width:100%;
     border-radius:6px;
 }
+
 @keyframes swing{
     0%{transform:rotate(-4deg);}
     50%{transform:rotate(4deg);}
     100%{transform:rotate(-4deg);}
 }
 
+/* CLIP */
 .clip{
-    height:12px;
-    width:22px;
+    height:10px;
+    width:20px;
     background:#d3a06f;
     border-radius:4px;
     margin:auto;
-    margin-top:-12px;
+    margin-top:-10px;
 }
 
-/* Viewer */
+/* VIEWER */
 #viewer{
     position:fixed;
     width:100%;
     height:100%;
-    background:rgba(0,0,0,0.85);
-    backdrop-filter:blur(6px);
+    background:rgba(0,0,0,0.9);
     display:flex;
     align-items:center;
     justify-content:center;
     opacity:0;
     pointer-events:none;
     transition:0.4s;
+    z-index:1000;
 }
 #viewer img{
-    width:350px;
+    width:min(90%,400px);
     border-radius:12px;
     box-shadow:0 0 40px pink;
 }
 
-/* Hearts */
+/* FLOWERS */
 @keyframes fall{
     0%{transform:translateY(-10px);}
     100%{transform:translateY(110vh); opacity:0;}
 }
 
-/* Sparkles */
+/* SPARKLES */
 .random-sparkle{
     width:6px;
     height:6px;
@@ -141,73 +162,76 @@ body{
     to{transform:translateY(-120vh); opacity:0;}
 }
 
-/* Cartoon dancers */
+/* CARTOONS */
 #cartoon-dancers{
     position:fixed;
-    bottom:10px;
+    bottom:5px;
     width:100%;
     display:flex;
     justify-content:center;
-    gap:25px;
-    font-size:40px;
-}
-.cartoon{
-    animation:dance 1s infinite alternate;
-}
-@keyframes dance{
-    0%{transform:translateY(0px);}
-    100%{transform:translateY(-10px);}
+    gap:15px;
+    font-size:30px;
 }
 
-/* Gift Button */
+/* BUTTON */
 #gift-btn{
     position:fixed;
-    bottom:90px;
+    bottom:60px;
     left:50%;
     transform:translateX(-50%);
-    background:#ff45c9;
+    background:#ff2fb2;
     color:white;
     padding:12px 30px;
     border-radius:30px;
     cursor:pointer;
-    font-size:20px;
+    font-size:18px;
     box-shadow:0 0 20px #ff4dcc;
-    animation:bounceGift 1.5s infinite;
+    transition:0.3s;
 }
-@keyframes bounceGift{
-    0%{transform:translateX(-50%) translateY(0);}
-    50%{transform:translateX(-50%) translateY(-7px);}
-    100%{transform:translateX(-50%) translateY(0);}
+#gift-btn:hover{
+    transform:translateX(-50%) scale(1.1);
 }
 
-/* Popup */
+/* POPUP */
 #popup{
     position:fixed;
-    top:0; left:0;
-    width:100%; height:100%;
-    background:rgba(0,0,0,0.8);
+    inset:0;
+    background:rgba(0,0,0,0.9);
     display:none;
     justify-content:center;
     align-items:center;
+    z-index:2000;
 }
 #popup-box{
     background:white;
-    width:300px;
+    width:85%;
+    max-width:320px;
     padding:25px;
     border-radius:20px;
     text-align:center;
     color:#ff2fc4;
-    box-shadow:0 0 30px pink;
+}
+
+button{
+    margin-top:10px;
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    background:#ff2fc4;
+    color:white;
+    cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-<div id="start">Tap to begin magic ✨</div>
+<div id="start">Tap to Enter Your Surprise ✨💖</div>
+
+<div id="title">💖 Our Forever Moments 💖</div>
 
 <audio id="music" loop>
-    <source src="music1.mpeg" type="audio/mpeg">
+<source src="music1.mpeg">
 </audio>
 
 <div id="scene"></div>
@@ -215,26 +239,22 @@ body{
 <div id="viewer"><img id="vimg"></div>
 
 <div id="cartoon-dancers">
-    <div class="cartoon">🐻‍❄️</div>
-    <div class="cartoon">🐼</div>
-    <div class="cartoon">🐰</div>
-    <div class="cartoon">🐥</div>
-    <div class="cartoon">🐸</div>
+🐼 🐰 🐸 🐻
 </div>
 
 <div id="gift-btn">🎁 Next Surprise</div>
 
 <div id="popup">
-    <div id="popup-box">
-        <h2>Ready for the next gift? 🎁</h2>
-        <p>A small surprise is waiting for you!</p>
-        <button id="go-next">Open Gift</button>
-    </div>
+<div id="popup-box">
+<h3>Ready for next surprise? 💖</h3>
+<p>Something more special is waiting 🎁</p>
+<button id="openBtn">Open</button>
+</div>
 </div>
 
 <script>
 
-/* Elements */
+/* ELEMENTS */
 const start = document.getElementById("start");
 const music = document.getElementById("music");
 const scene = document.getElementById("scene");
@@ -242,81 +262,98 @@ const viewer = document.getElementById("viewer");
 const vimg = document.getElementById("vimg");
 const popup = document.getElementById("popup");
 const giftBtn = document.getElementById("gift-btn");
-const goNext = document.getElementById("go-next");
+const openBtn = document.getElementById("openBtn");
 
-/* Start */
-start.onclick = () => {
+/* START */
+start.onclick = ()=>{
     music.play();
-    start.style.display = "none";
+    start.style.display="none";
 };
 
-/* Rope */
-let rope = document.createElement("div");
-rope.className = "string";
+/* ROPE */
+let rope=document.createElement("div");
+rope.className="string";
 scene.appendChild(rope);
 
-/* Lights */
+/* LIGHTS */
 for(let i=0;i<25;i++){
-    let b = document.createElement("div");
-    b.className="bulb";
-    b.style.left = (5 + i*3.5) + "%";
-    b.style.top = "calc(20% + 20px)";
-    scene.appendChild(b);
+let b=document.createElement("div");
+b.className="bulb";
+b.style.left=(5+i*3.5)+"%";
+b.style.top="calc(20% + 15px)";
+scene.appendChild(b);
 }
 
-/* Photos */
+/* RANDOM POSITIONS */
+let positions=[
+{left:"8%",top:"32%"},
+{left:"25%",top:"40%"},
+{left:"45%",top:"30%"},
+{left:"65%",top:"38%"},
+{left:"80%",top:"32%"}
+];
+
+/* PHOTOS */
 for(let i=0;i<5;i++){
-    let p = document.createElement("div");
-    p.className="photo";
-    p.style.left = (10 + i*18) + "%";
-    p.style.top = "30%";
+let p=document.createElement("div");
+p.className="photo";
 
-    p.innerHTML = `
-        <div class="clip"></div>
-        <img src="photo${i+1}.jpg">
-    `;
+let pos=positions[i];
+p.style.left=pos.left;
+p.style.top=pos.top;
 
-    scene.appendChild(p);
+p.innerHTML=`
+<div class="clip"></div>
+<img src="photo${i+1}.jpg">
+`;
 
-    p.onclick = () => {
-        vimg.src = p.querySelector("img").src;
-        viewer.style.opacity = 1;
-        viewer.style.pointerEvents = "auto";
-    };
+scene.appendChild(p);
+
+p.onclick=()=>{
+vimg.src=p.querySelector("img").src;
+viewer.style.opacity=1;
+viewer.style.pointerEvents="auto";
+};
 }
 
-/* Close viewer */
-viewer.onclick = () => {
-    viewer.style.opacity = 0;
-    viewer.style.pointerEvents = "none";
+/* CLOSE VIEWER */
+viewer.onclick=()=>{
+viewer.style.opacity=0;
+viewer.style.pointerEvents="none";
 };
 
-/* Hearts */
-setInterval(() => {
-    let h = document.createElement("div");
-    h.innerHTML = ["🌸","🌻","🌼","🌷"][Math.floor(Math.random()*4)];
-    h.style.position="fixed";
-    h.style.left=Math.random()*100+"%";
-    h.style.top="-10px";
-    h.style.fontSize=(20+Math.random()*25)+"px";
-    h.style.animation="fall 6s linear forwards";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),6000);
+/* FLOWERS */
+setInterval(()=>{
+let f=document.createElement("div");
+f.innerHTML=["🌸","🌼","🌺","💮"][Math.floor(Math.random()*4)];
+f.style.position="fixed";
+f.style.left=Math.random()*100+"%";
+f.style.top="-10px";
+f.style.fontSize=(20+Math.random()*20)+"px";
+f.style.animation="fall 6s linear forwards";
+document.body.appendChild(f);
+setTimeout(()=>f.remove(),6000);
 },400);
 
-/* Sparkles */
-setInterval(() => {
-    let sp = document.createElement("div");
-    sp.className = "random-sparkle";
-    sp.style.left = Math.random()*100 + "%";
-    sp.style.bottom = "0";
-    document.body.appendChild(sp);
-    setTimeout(() => sp.remove(), 3000);
+/* SPARKLES */
+setInterval(()=>{
+let s=document.createElement("div");
+s.className="random-sparkle";
+s.style.left=Math.random()*100+"%";
+s.style.bottom="0";
+document.body.appendChild(s);
+setTimeout(()=>s.remove(),3000);
 },150);
 
-/* Popup */
-giftBtn.onclick = () => popup.style.display="flex";
-goNext.onclick = () => window.location.href="gift.html";
+/* BUTTON FIX */
+giftBtn.addEventListener("click", ()=>{
+    popup.style.display="flex";
+});
+
+/* FINAL NAVIGATION FIX */
+openBtn.addEventListener("click", ()=>{
+    window.location.href = "gift.html"; // FILE SAME AS YOUR PROJECT
+});
 
 </script>
 
