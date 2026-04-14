@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Forever Moments 💖✨</title>
+<title>Our Magical Moments ✨💖</title>
 
 <style>
 body{
@@ -25,7 +25,7 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    font-size:20px;
+    font-size:22px;
     text-align:center;
     cursor:pointer;
     z-index:9999;
@@ -38,15 +38,10 @@ body{
     top:10px;
     width:100%;
     text-align:center;
-    font-size:26px;
-    color:#fff;
-    text-shadow:0 0 20px #ff80df, 0 0 40px #ff3ecf;
-    animation:glowTitle 2s infinite alternate;
+    font-size:22px;
+    color:white;
+    text-shadow:0 0 15px pink;
     z-index:50;
-}
-@keyframes glowTitle{
-    from{opacity:0.8;}
-    to{opacity:1;}
 }
 
 /* SCENE */
@@ -94,6 +89,7 @@ body{
     animation:swing 4s infinite ease-in-out;
     transform-origin:top center;
     cursor:pointer;
+    transition:0.3s;
 }
 .photo:hover{
     transform:scale(1.1);
@@ -172,6 +168,13 @@ body{
     gap:15px;
     font-size:30px;
 }
+.cartoon{
+    animation:dance 0.6s infinite alternate;
+}
+@keyframes dance{
+    0%{transform:translateY(0);}
+    100%{transform:translateY(-8px);}
+}
 
 /* BUTTON */
 #gift-btn{
@@ -179,24 +182,20 @@ body{
     bottom:60px;
     left:50%;
     transform:translateX(-50%);
-    background:#ff2fb2;
+    background:#ff45c9;
     color:white;
-    padding:12px 30px;
+    padding:10px 25px;
     border-radius:30px;
     cursor:pointer;
-    font-size:18px;
+    font-size:16px;
     box-shadow:0 0 20px #ff4dcc;
-    transition:0.3s;
-}
-#gift-btn:hover{
-    transform:translateX(-50%) scale(1.1);
 }
 
 /* POPUP */
 #popup{
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,0.9);
+    background:rgba(0,0,0,0.85);
     display:none;
     justify-content:center;
     align-items:center;
@@ -205,8 +204,8 @@ body{
 #popup-box{
     background:white;
     width:85%;
-    max-width:320px;
-    padding:25px;
+    max-width:300px;
+    padding:20px;
     border-radius:20px;
     text-align:center;
     color:#ff2fc4;
@@ -214,21 +213,20 @@ body{
 
 button{
     margin-top:10px;
-    padding:10px 20px;
+    padding:8px 20px;
     border:none;
     border-radius:20px;
     background:#ff2fc4;
     color:white;
-    cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-<div id="start">Tap to Enter Your Surprise ✨💖</div>
+<div id="start">Tap to Enter Our Magical World ✨💖</div>
 
-<div id="title">💖 Our Forever Moments 💖</div>
+<div id="title">Poohhhhh.exe Running 💛😂</div>
 
 <audio id="music" loop>
 <source src="music1.mpeg">
@@ -239,7 +237,10 @@ button{
 <div id="viewer"><img id="vimg"></div>
 
 <div id="cartoon-dancers">
-🐼 🐰 🐸 🐻
+<div class="cartoon">🐼</div>
+<div class="cartoon">🐰</div>
+<div class="cartoon">🐸</div>
+<div class="cartoon">🐻</div>
 </div>
 
 <div id="gift-btn">🎁 Next Surprise</div>
@@ -247,27 +248,17 @@ button{
 <div id="popup">
 <div id="popup-box">
 <h3>Ready for next surprise? 💖</h3>
-<p>Something more special is waiting 🎁</p>
-<button id="openBtn">Open</button>
+<p>One more special thing waiting 🎁</p>
+<button onclick="goNext()">Open</button>
 </div>
 </div>
 
 <script>
 
-/* ELEMENTS */
-const start = document.getElementById("start");
-const music = document.getElementById("music");
-const scene = document.getElementById("scene");
-const viewer = document.getElementById("viewer");
-const vimg = document.getElementById("vimg");
-const popup = document.getElementById("popup");
-const giftBtn = document.getElementById("gift-btn");
-const openBtn = document.getElementById("openBtn");
-
 /* START */
-start.onclick = ()=>{
-    music.play();
-    start.style.display="none";
+start.onclick=()=>{
+music.play();
+start.style.display="none";
 };
 
 /* ROPE */
@@ -316,7 +307,7 @@ viewer.style.pointerEvents="auto";
 };
 }
 
-/* CLOSE VIEWER */
+/* VIEWER CLOSE */
 viewer.onclick=()=>{
 viewer.style.opacity=0;
 viewer.style.pointerEvents="none";
@@ -345,15 +336,12 @@ document.body.appendChild(s);
 setTimeout(()=>s.remove(),3000);
 },150);
 
-/* BUTTON FIX */
-giftBtn.addEventListener("click", ()=>{
-    popup.style.display="flex";
-});
+/* POPUP */
+giftBtn.onclick=()=>popup.style.display="flex";
 
-/* FINAL NAVIGATION FIX */
-openBtn.addEventListener("click", ()=>{
-    window.location.href = "gift.html"; // FILE SAME AS YOUR PROJECT
-});
+function goNext(){
+window.location.href="gift.html";
+}
 
 </script>
 
