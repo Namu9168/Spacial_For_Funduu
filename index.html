@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fundu 💖 Cinematic</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>First page</title>
 
-<!-- ✅ CORRECT GSAP -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
 <style>
@@ -17,151 +16,145 @@ body{
     color:white;
 }
 
-/* ✅ TAP START SCREEN */
-#tapStart {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+/* START SCREEN */
+#tapStart{
+    position:fixed;
+    inset:0;
     background:black;
     display:flex;
-    align-items:center;
     justify-content:center;
-    z-index:999999;
-    cursor:pointer;
-    animation: fadeIn 1s ease-out;
-}
-#tapBox { text-align:center; animation: popIn 1.2s; }
-#tapText { 
-    font-size:26px;
-    margin-bottom:20px;
-    animation: glowText 2s infinite alternate;
-}
-#tapBtn{
-    background:#ff2fbf;
-    padding:14px 35px;
-    border-radius:40px;
-    font-size:20px;
-    cursor:pointer;
-    box-shadow:0 0 18px #ff53d8;
-    animation:pulseBtn 1.5s infinite;
-}
-#tapArrow{
-    font-size:32px;
-    margin-top:25px;
-    animation:arrowBounce 1s infinite;
+    align-items:center;
+    z-index:9999;
+    text-align:center;
 }
 
-/* Animations */
-@keyframes popIn{from{scale:0.7;opacity:0;}to{scale:1;opacity:1;}}
-@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-@keyframes pulseBtn{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.1);}
-    100%{transform:scale(1);}
-}
-@keyframes glowText{
-    0%{text-shadow:0 0 8px #ff54db;}
-    100%{text-shadow:0 0 18px #ff96f0;}
-}
-@keyframes arrowBounce{
-    0%{transform:translateY(0);}
-    50%{transform:translateY(10px);}
-    100%{transform:translateY(0);}
+/* VIDEO */
+#bgVideo{
+    position:fixed;
+    top:50%; left:50%;
+    min-width:100%; min-height:100%;
+    transform:translate(-50%,-50%);
+    object-fit:cover;
+    z-index:-2;
 }
 
-/* Background Video */
-#bgVideo {
-    position: fixed;
-    top: 50%; left: 50%;
-    min-width: 100%; min-height: 100%;
-    transform: translate(-50%, -50%);
-    object-fit: cover;
+#pinkOverlay{
+    position:fixed;
+    inset:0;
+    background: radial-gradient(circle, rgba(255,120,200,0.25), rgba(0,0,0,0.8));
     z-index:-1;
 }
 
-/* Pink Overlay */
-#pinkOverlay {
-    position: fixed;
-    width: 100%; height: 100%;
-    background: radial-gradient(circle, rgba(255,120,200,0.25), rgba(0,0,0,0.5));
-    z-index:0;
-}
-
-/* Sparkles */
-.sparkle{
-    position:fixed;
-    width:4px; height:4px;
-    background:white;
-    border-radius:50%;
-    animation:floatUp 5s linear forwards;
-}
-@keyframes floatUp{
-    to{transform:translateY(-120vh);opacity:0;}
-}
-
-/* Content */
-.container{
+/* TITLE */
+h1{
     text-align:center;
-    margin-top:70px;
-    position:relative;
-    z-index:10;
+    margin-top:40px;
+    font-size:clamp(28px,6vw,52px);
+    background: linear-gradient(90deg,#ff4da6,#ffd6f5,#ff9ae8,#ff4da6);
+    background-size:300%;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    text-shadow:0 0 20px rgba(255,120,200,0.6);
+    opacity:0;
+    transform:translateY(-120px);
+    animation:gradientMove 6s infinite linear;
+}
+@keyframes gradientMove{
+    100%{background-position:300%;}
 }
 
+/* CENTER */
+.container{
+    position:absolute;
+    top:55%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    z-index:5;
+}
+
+/* CHAT */
 #chatArea{
     display:flex;
     flex-direction:column;
     align-items:center;
 }
-
 .chat{
     background:#dcf8c6;
     color:black;
     padding:10px 14px;
-    margin:10px 0;
+    margin:8px;
     border-radius:20px;
     opacity:0;
     transform:translateY(30px);
-    font-size:17px;
 }
 
-/* Cake */
+/* CAKE */
 #cake{
-    font-size:120px;
+    font-size:100px;
     display:none;
     opacity:0;
     cursor:pointer;
     margin-top:20px;
 }
 
-/* Popup */
-#popupOverlay {
-    position: fixed;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.75);
-    top: 0; left: 0;
+/* CONFETTI – ABOVE POPUP ✅ */
+.confetti{
+    position:fixed;
+    width:8px;
+    height:12px;
+    background:hsl(calc(var(--i)*36),90%,60%);
+    top:-10px;
+    left:calc(var(--x)*1%);
+    animation:fall linear forwards;
+    z-index:20001;
+    pointer-events:none;
+}
+@keyframes fall{
+    to{transform:translateY(120vh) rotate(720deg);}
+}
+
+/* FIREWORKS – ABOVE POPUP ✅ */
+.firework{
+    position:fixed;
+    width:6px;
+    height:6px;
+    background:white;
+    border-radius:50%;
+    animation:explode 1s forwards;
+    z-index:20001;
+    pointer-events:none;
+}
+@keyframes explode{
+    to{transform:scale(8);opacity:0;}
+}
+
+/* POPUP */
+#popupOverlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.85);
     display:none;
     justify-content:center;
     align-items:center;
-    z-index:2000;
+    z-index:20000;
 }
+
 #popupBox{
     background:white;
+    color:#ff4da6;
     padding:25px;
     border-radius:20px;
     text-align:center;
-    color:#ff4da6;
-    transform:scale(0.6);
-    opacity:0;
-    box-shadow:0 0 25px #ff80e6;
 }
+
 #popupBtn{
     margin-top:15px;
-    padding:10px 22px;
+    padding:10px 20px;
     background:#ff4da6;
     color:white;
     border:none;
     border-radius:30px;
-    font-size:18px;
     cursor:pointer;
 }
 </style>
@@ -169,34 +162,27 @@ body{
 
 <body>
 
-<!-- ✅ TAP SCREEN -->
 <div id="tapStart">
-    <div id="tapBox">
-        <div id="tapText">✨ Tap to Begin the Magic ✨</div>
-        <div id="tapBtn">Start 💖</div>
-        <div id="tapArrow">⬇️</div>
-    </div>
+    <h2>✨ Tap to Start Magic ✨</h2>
 </div>
 
-<!-- Background Video -->
 <video id="bgVideo" autoplay muted loop playsinline>
     <source src="video2.mp4" type="video/mp4">
 </video>
 
 <div id="pinkOverlay"></div>
 
-<!-- Music -->
-<audio id="music" autoplay loop muted>
+<audio id="music" loop>
     <source src="music1.mpeg" type="audio/mpeg">
 </audio>
 
+<h1 id="title">🎉 Happy Birthday Pooohhhho 🎉</h1>
+
 <div class="container">
-    <h1>Happy Birthday Fundu 💖</h1>
     <div id="chatArea"></div>
     <div id="cake">🎂</div>
 </div>
 
-<!-- Popup -->
 <div id="popupOverlay">
     <div id="popupBox">
         <p>Happyyyy Birthday 💖<br>You are amazing ✨</p>
@@ -205,89 +191,96 @@ body{
 </div>
 
 <script>
+const tapStart=document.getElementById("tapStart");
+const music=document.getElementById("music");
+const title=document.getElementById("title");
+const chatArea=document.getElementById("chatArea");
+const cake=document.getElementById("cake");
+const popupOverlay=document.getElementById("popupOverlay");
+const popupBtn=document.getElementById("popupBtn");
 
-/* ✅ STORY STARTS ONLY AFTER TAP */
-let started = false;
+tapStart.onclick=startExp;
+tapStart.ontouchstart=startExp;
 
-function begin(){
-    if(started) return;
-    started = true;
-
-    tapStart.style.opacity = 0;
-    setTimeout(()=>tapStart.style.display="none",500);
-
-    // ✅ Start music
-    music.volume = 0;
+function startExp(){
+    tapStart.style.display="none";
+    music.muted=false;
     music.play().catch(()=>{});
-    setTimeout(()=> {
-        music.muted = false;
-        gsap.to(music, { volume:1, duration:2 });
-    },500);
-
-    startSparkles();
+    gsap.to(title,{y:0,opacity:1,duration:1.5,ease:"bounce.out"});
     startChat();
 }
 
-tapStart.addEventListener("click", begin);
-tapBtn.addEventListener("click", begin);
-
-/* ✅ Sparkles */
-function startSparkles(){
-    setInterval(()=>{
-        let s=document.createElement("div");
-        s.className="sparkle";
-        s.style.left=Math.random()*100+"vw";
-        s.style.top="100vh";
-        document.body.appendChild(s);
-        setTimeout(()=>s.remove(),5000);
-    },180);
-}
-
-/* ✅ Chat System */
-const msgs = [
-"Hi Fundu 🎀",
-"Today is your special day 💖",
+const msgs=[
+"Hiiiiiiiiii 🤗🎀",
+"Today is your special day 😻",
 "You deserve everything ✨",
 "Stay happy always 🌸",
-"Something for you 🎂, click it to cut 🔪"
+"Click the cake 🎂"
 ];
-
 let i=0;
 
 function startChat(){
-    setInterval(()=>{
-        if(i < msgs.length){
-            let b=document.createElement("div");
-            b.className="chat";
-            b.innerText=msgs[i];
-            chatArea.appendChild(b);
-            gsap.to(b,{opacity:1,y:0});
+    let interval=setInterval(()=>{
+        if(i<msgs.length){
+            let c=document.createElement("div");
+            c.className="chat";
+            c.innerText=msgs[i];
+            chatArea.appendChild(c);
+            gsap.to(c,{opacity:1,y:0});
             i++;
-
-            if(i === msgs.length){
-                setTimeout(showCake,2000);
-            }
+        }else{
+            clearInterval(interval);
+            setTimeout(showCake,1000);
         }
-    },2000);
+    },1200);
 }
 
-/* ✅ Cake Appears */
 function showCake(){
     cake.style.display="block";
     gsap.to(cake,{opacity:1,scale:1.1});
 }
 
-/* ✅ Popup */
-cake.onclick = () =>{
+cake.onclick=celebrate;
+cake.ontouchstart=celebrate;
+
+function celebrate(){
+    startConfetti();
+    startFireworks();
     popupOverlay.style.display="flex";
-    gsap.to("#popupBox",{opacity:1,scale:1,duration:0.7});
 }
 
-/* ✅ Next Page */
-popupBtn.onclick = ()=>{
-    window.location.href = "photo_wall_page.html";
-};
+function startConfetti(){
+    setInterval(()=>{
+        for(let i=0;i<15;i++){
+            let c=document.createElement("div");
+            c.className="confetti";
+            c.style.setProperty("--x",Math.random()*100);
+            c.style.setProperty("--i",Math.random()*10);
+            c.style.animationDuration=(2+Math.random()*2)+"s";
+            document.body.appendChild(c);
+            setTimeout(()=>c.remove(),4000);
+        }
+    },300);
+}
 
+function startFireworks(){
+    setInterval(()=>{
+        let x=Math.random()*window.innerWidth;
+        let y=Math.random()*window.innerHeight/2;
+        for(let i=0;i<18;i++){
+            let f=document.createElement("div");
+            f.className="firework";
+            f.style.left=x+"px";
+            f.style.top=y+"px";
+            document.body.appendChild(f);
+            setTimeout(()=>f.remove(),900);
+        }
+    },700);
+}
+
+popupBtn.onclick=()=>{
+    window.location.href="photo_wall_page.html";
+};
 </script>
 
 </body>
