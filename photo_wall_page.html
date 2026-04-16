@@ -1,359 +1,349 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Poohhhhhooooo.exe 💜</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --army-purple: #7D52AB;
+            --light-purple: #BB86FC;
+            --dark-bg: #0f0514;
+        }
 
-<title>Our Magical Moments ✨💖</title>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: radial-gradient(circle at center, #1a0a2e, #0f0514, #000000);
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            color: white;
+        }
 
-<style>
-body{
-    margin:0;
-    overflow:hidden;
-    background: radial-gradient(circle at center, #ffb6d5, #c36bb8, #4a1f47);
-    font-family:'Poppins', sans-serif;
-}
+        /* Cinematic Vignette */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.8) 100%);
+            pointer-events: none;
+            z-index: 5;
+        }
 
-/* START SCREEN */
-#start{
-    position:fixed;
-    width:100%;
-    height:100%;
-    background:black;
-    color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:22px;
-    text-align:center;
-    cursor:pointer;
-    z-index:9999;
-    padding:20px;
-}
+        #start {
+            position: fixed;
+            inset: 0;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            cursor: pointer;
+            letter-spacing: 2px;
+            font-weight: 300;
+        }
 
-/* TITLE */
-#title{
-    position:fixed;
-    top:10px;
-    width:100%;
-    text-align:center;
-    font-size:22px;
-    color:white;
-    text-shadow:0 0 15px pink;
-    z-index:50;
-}
+        #title {
+            position: fixed;
+            top: 40px;
+            width: 100%;
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: var(--light-purple);
+            text-shadow: 0 0 20px var(--army-purple);
+            z-index: 50;
+        }
 
-/* SCENE */
-#scene{
-    position:relative;
-    width:100%;
-    height:100vh;
-}
+        /* THE ROPE */
+        #canvas-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
 
-/* ROPE */
-.string{
-    position:absolute;
-    width:90%;
-    height:80px;
-    left:5%;
-    top:20%;
-    border-bottom:4px solid #ffd4ff;
-    border-radius:0 0 70% 70%;
-    box-shadow:0 0 20px #ffb2f9;
-}
+        .rope-line {
+            position: absolute;
+            width: 90%;
+            height: 120px;
+            left: 5%;
+            top: 15%;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 0 0 50% 50%;
+            z-index: 10;
+        }
 
-/* LIGHTS */
-.bulb{
-    position:absolute;
-    width:12px;
-    height:12px;
-    border-radius:50%;
-    background:white;
-    box-shadow:0 0 15px pink;
-    animation:blink 1.5s infinite alternate;
-}
-@keyframes blink{
-    0%{opacity:0.5;}
-    100%{opacity:1;}
-}
+        /* LIGHT BULBS */
+        .bulb {
+            position: absolute;
+            width: 10px;
+            height: 14px;
+            background: #fff;
+            border-radius: 50% 50% 40% 40%;
+            box-shadow: 0 0 15px #fff, 0 0 30px var(--light-purple);
+            animation: glow 1.5s infinite alternate ease-in-out;
+            z-index: 11;
+            transform-origin: top center;
+        }
 
-/* PHOTOS */
-.photo{
-    width:min(120px, 28vw);
-    background:white;
-    padding:8px 8px 16px;
-    border-radius:10px;
-    position:absolute;
-    box-shadow:0 10px 25px rgba(255,140,200,0.6);
-    animation:swing 4s infinite ease-in-out;
-    transform-origin:top center;
-    cursor:pointer;
-    transition:0.3s;
-}
-.photo:hover{
-    transform:scale(1.1);
-    box-shadow:0 0 40px hotpink;
-}
+        @keyframes glow {
+            from { opacity: 0.5; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1.1); }
+        }
 
-.photo img{
-    width:100%;
-    border-radius:6px;
-}
+        /* HANGING PHOTOS */
+        .photo-frame {
+            position: absolute;
+            transform-origin: top center;
+            animation: hangSwing 5s infinite ease-in-out;
+            cursor: pointer;
+            z-index: 15;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
 
-@keyframes swing{
-    0%{transform:rotate(-4deg);}
-    50%{transform:rotate(4deg);}
-    100%{transform:rotate(-4deg);}
-}
+        /* The vertical string connecting clip to rope */
+        .photo-string {
+            width: 1px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 0 auto;
+        }
 
-/* CLIP */
-.clip{
-    height:10px;
-    width:20px;
-    background:#d3a06f;
-    border-radius:4px;
-    margin:auto;
-    margin-top:-10px;
-}
+        .clip {
+            width: 14px;
+            height: 18px;
+            background: #222;
+            border-radius: 2px;
+            margin: -2px auto 0;
+            position: relative;
+            z-index: 16;
+            border: 1px solid #444;
+        }
 
-/* VIEWER */
-#viewer{
-    position:fixed;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.9);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    opacity:0;
-    pointer-events:none;
-    transition:0.4s;
-    z-index:1000;
-}
-#viewer img{
-    width:min(90%,400px);
-    border-radius:12px;
-    box-shadow:0 0 40px pink;
-}
+        .photo-content {
+            background: white;
+            padding: 8px 8px 20px 8px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            width: 120px;
+            border-radius: 2px;
+        }
 
-/* FLOWERS */
-@keyframes fall{
-    0%{transform:translateY(-10px);}
-    100%{transform:translateY(110vh); opacity:0;}
-}
+        .photo-content img {
+            width: 100%;
+            display: block;
+            filter: grayscale(10%) contrast(1.05);
+        }
 
-/* SPARKLES */
-.random-sparkle{
-    width:6px;
-    height:6px;
-    position:fixed;
-    background:white;
-    border-radius:50%;
-    box-shadow:0 0 10px pink;
-    animation:spark 3s linear forwards;
-}
-@keyframes spark{
-    from{opacity:1;}
-    to{transform:translateY(-120vh); opacity:0;}
-}
+        @keyframes hangSwing {
+            0% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+            100% { transform: rotate(-3deg); }
+        }
 
-/* CARTOONS */
-#cartoon-dancers{
-    position:fixed;
-    bottom:5px;
-    width:100%;
-    display:flex;
-    justify-content:center;
-    gap:15px;
-    font-size:30px;
-}
-.cartoon{
-    animation:dance 0.6s infinite alternate;
-}
-@keyframes dance{
-    0%{transform:translateY(0);}
-    100%{transform:translateY(-8px);}
-}
+        .photo-frame:hover {
+            transform: scale(1.1) rotate(0deg) !important;
+            z-index: 100;
+        }
 
-/* BUTTON */
-#gift-btn{
-    position:fixed;
-    bottom:60px;
-    left:50%;
-    transform:translateX(-50%);
-    background:#ff45c9;
-    color:white;
-    padding:10px 25px;
-    border-radius:30px;
-    cursor:pointer;
-    font-size:16px;
-    box-shadow:0 0 20px #ff4dcc;
-}
+        /* CELEBRATION BUTTON */
+        #gift-btn {
+            position: fixed;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(45deg, var(--army-purple), #4a1e75);
+            border: 1px solid var(--light-purple);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(125, 82, 171, 0.5);
+            z-index: 100;
+            transition: 0.3s;
+        }
 
-/* POPUP */
-#popup{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.85);
-    display:none;
-    justify-content:center;
-    align-items:center;
-    z-index:2000;
-}
-#popup-box{
-    background:white;
-    width:85%;
-    max-width:300px;
-    padding:20px;
-    border-radius:20px;
-    text-align:center;
-    color:#ff2fc4;
-}
+        #gift-btn:hover {
+            box-shadow: 0 0 40px var(--light-purple);
+            transform: translateX(-50%) translateY(-3px);
+        }
 
-button{
-    margin-top:10px;
-    padding:8px 20px;
-    border:none;
-    border-radius:20px;
-    background:#ff2fc4;
-    color:white;
-}
-</style>
+        /* CONFETTI */
+        .confetti {
+            position: fixed;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        /* VIEWER */
+        #viewer {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(15px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        #viewer img {
+            max-width: 85%;
+            max-height: 75vh;
+            border: 10px solid white;
+            box-shadow: 0 0 50px rgba(0,0,0,1);
+        }
+    </style>
 </head>
-
 <body>
 
-<div id="start">Tap to Enter Our Magical World ✨💖</div>
+<div id="start">TAP TO ENTER THE MAGIC SHOP 💜</div>
 
-<div id="title">Poohhhhh.exe Running 💛😂</div>
+<div id="title">Poohhhhhooooo.exe 💜</div>
 
 <audio id="music" loop>
-<source src="music1.mpeg">
+    <source src="music1.mpeg" type="audio/mpeg">
 </audio>
 
-<div id="scene"></div>
-
-<div id="viewer"><img id="vimg"></div>
-
-<div id="cartoon-dancers">
-<div class="cartoon">🐼</div>
-<div class="cartoon">🐰</div>
-<div class="cartoon">🐸</div>
-<div class="cartoon">🐻</div>
+<div id="canvas-container">
+    <div class="rope-line"></div>
 </div>
 
-<div id="gift-btn">🎁 Next Surprise</div>
+<div id="viewer" onclick="this.style.display='none'">
+    <img id="vimg" src="">
+</div>
 
-<div id="popup">
-<div id="popup-box">
-<h3>Ready for next surprise? 💖</h3>
-<p>One more special thing waiting 🎁</p>
-<button onclick="goNext()">Open</button>
-</div>
-</div>
+<button id="gift-btn">Unwrap Surprise ✨</button>
 
 <script>
+    const music = document.getElementById("music");
+    const start = document.getElementById("start");
+    const container = document.getElementById("canvas-container");
+    const giftBtn = document.getElementById("gift-btn");
 
-/* GET ELEMENTS */
-const start = document.getElementById("start");
-const music = document.getElementById("music");
-const scene = document.getElementById("scene");
-const viewer = document.getElementById("viewer");
-const vimg = document.getElementById("vimg");
-const giftBtn = document.getElementById("gift-btn");
-const popup = document.getElementById("popup");
-
-/* START */
-start.onclick = () => {
-    music.play();
-    start.style.display = "none";
-};
-
-/* ROPE */
-let rope = document.createElement("div");
-rope.className = "string";
-scene.appendChild(rope);
-
-/* LIGHTS */
-for(let i=0;i<25;i++){
-    let b=document.createElement("div");
-    b.className="bulb";
-    b.style.left=(5+i*3.5)+"%";
-    b.style.top="calc(20% + 15px)";
-    scene.appendChild(b);
-}
-
-/* POSITIONS */
-let positions=[
-    {left:"8%",top:"32%"},
-    {left:"25%",top:"40%"},
-    {left:"45%",top:"30%"},
-    {left:"65%",top:"38%"},
-    {left:"80%",top:"32%"}
-];
-
-/* PHOTOS */
-for(let i=0;i<5;i++){
-    let p=document.createElement("div");
-    p.className="photo";
-
-    let pos=positions[i];
-    p.style.left=pos.left;
-    p.style.top=pos.top;
-
-    p.innerHTML=`
-    <div class="clip"></div>
-    <img src="photo${i+1}.jpg">
-    `;
-
-    scene.appendChild(p);
-
-    p.onclick=()=>{
-        vimg.src=p.querySelector("img").src;
-        viewer.style.opacity=1;
-        viewer.style.pointerEvents="auto";
+    start.onclick = () => {
+        music.play();
+        start.style.opacity = "0";
+        setTimeout(() => start.remove(), 500);
     };
-}
 
-/* CLOSE VIEWER */
-viewer.onclick=()=>{
-    viewer.style.opacity=0;
-    viewer.style.pointerEvents="none";
-};
+    /**
+     * THE MATH:
+     * This function ensures everything follows the "sag" of the rope.
+     * x: percentage (0 to 100)
+     * returns: y-coordinate in pixels
+     */
+    function getRopeY(x) {
+        const height = 120; // Matches CSS .rope-line height
+        const topOffset = window.innerHeight * 0.15; // Matches CSS .rope-line top
+        // Parabola formula: y = a(x-50)^2 + offset
+        const sag = Math.pow((x - 50), 2) * 0.045; 
+        return topOffset + height + sag;
+    }
 
-/* FLOWERS */
-setInterval(()=>{
-    let f=document.createElement("div");
-    f.innerHTML=["🌸","🌼","🌺","💮"][Math.floor(Math.random()*4)];
-    f.style.position="fixed";
-    f.style.left=Math.random()*100+"%";
-    f.style.top="-10px";
-    f.style.fontSize=(20+Math.random()*20)+"px";
-    f.style.animation="fall 6s linear forwards";
-    document.body.appendChild(f);
-    setTimeout(()=>f.remove(),6000);
-},400);
+    // 1. PLACE BULBS EXACTLY ON THE ROPE
+    for(let i=0; i<=25; i++) {
+        let x = 5 + (i * 3.6); // Spacing along the 90% width
+        let bulb = document.createElement("div");
+        bulb.className = "bulb";
+        bulb.style.left = x + "%";
+        bulb.style.top = getRopeY(x) + "px";
+        bulb.style.animationDelay = (Math.random() * 2) + "s";
+        container.appendChild(bulb);
+    }
 
-/* SPARKLES */
-setInterval(()=>{
-    let s=document.createElement("div");
-    s.className="random-sparkle";
-    s.style.left=Math.random()*100+"%";
-    s.style.bottom="0";
-    document.body.appendChild(s);
-    setTimeout(()=>s.remove(),3000);
-},150);
+    // 2. HANG PHOTOS EXACTLY ON THE ROPE
+    const photos = ["photo1.jpg", "photo2.jpg", "photo3.jpg", "photo4.jpg", "photo5.jpg"];
+    const xPositions = [15, 32, 50, 68, 85];
 
-/* BUTTON FIX */
-giftBtn.onclick = () => {
-    popup.style.display = "flex";
-};
+    photos.forEach((src, i) => {
+        const x = xPositions[i];
+        const y = getRopeY(x);
 
-/* NEXT PAGE */
-function goNext(){
-    window.location.href = "gift.html";
-}
+        let frame = document.createElement("div");
+        frame.className = "photo-frame";
+        frame.style.left = `calc(${x}% - 60px)`;
+        frame.style.top = (y - 5) + "px"; // Start at the rope
+        frame.style.animationDelay = (i * 0.3) + "s";
+
+        frame.innerHTML = `
+            <div class="photo-string"></div>
+            <div class="clip"></div>
+            <div class="photo-content">
+                <img src="${src}">
+            </div>
+        `;
+
+        frame.onclick = () => {
+            document.getElementById("vimg").src = src;
+            document.getElementById("viewer").style.display = "flex";
+        };
+
+        container.appendChild(frame);
+    });
+
+    // 3. CELEBRATION EFFECT (Confetti & Stars)
+    giftBtn.onclick = () => {
+        for(let i=0; i<150; i++) {
+            const confetti = document.createElement("div");
+            confetti.className = "confetti";
+            
+            // Randomly choose BTS colors: Purple, Silver, Gold
+            const colors = ['#7D52AB', '#BB86FC', '#FFFFFF', '#FFD700', '#A020F0'];
+            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+            
+            confetti.style.left = Math.random() * 100 + "vw";
+            confetti.style.top = "-10px";
+            confetti.style.width = (Math.random() * 8 + 4) + "px";
+            confetti.style.height = (Math.random() * 12 + 6) + "px";
+            confetti.style.opacity = Math.random();
+            
+            const duration = Math.random() * 3 + 2;
+            confetti.style.transition = `transform ${duration}s linear, opacity ${duration}s ease-out`;
+            
+            document.body.appendChild(confetti);
+
+            // Animate
+            setTimeout(() => {
+                confetti.style.transform = `translate(${(Math.random() - 0.5) * 300}px, ${window.innerHeight + 20}px) rotate(${Math.random() * 1000}deg)`;
+                confetti.style.opacity = "0";
+            }, 50);
+
+            setTimeout(() => confetti.remove(), duration * 1000);
+        }
+
+        // Wait for celebration then move
+        setTimeout(() => {
+            window.location.href = "gift.html";
+        }, 3500);
+    };
+
+    // Subtle floating galaxy background sparkles
+    setInterval(() => {
+        const star = document.createElement("div");
+        star.innerHTML = "✨";
+        star.style.position = "fixed";
+        star.style.color = "white";
+        star.style.left = Math.random() * 100 + "vw";
+        star.style.top = "100vh";
+        star.style.fontSize = (Math.random() * 10 + 10) + "px";
+        star.style.zIndex = "1";
+        star.style.pointerEvents = "none";
+        document.body.appendChild(star);
+        
+        const duration = 6000 + Math.random() * 4000;
+        const anim = star.animate([
+            { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+            { transform: `translateY(-110vh) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+        ], { duration: duration });
+
+        anim.onfinish = () => star.remove();
+    }, 400);
 
 </script>
 
