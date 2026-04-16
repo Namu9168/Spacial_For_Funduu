@@ -2,167 +2,148 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Surprise Box 🎁</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>The Magic Shop Finale 💜</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap');
+
 *{
   box-sizing:border-box;
-  touch-action:manipulation;
+  /* Changed to manipulation to allow zooming if needed but keep dragging smooth */
+  touch-action: manipulation; 
 }
 
 body{
   margin:0;
   overflow:hidden;
   height:100vh;
+  width: 100vw;
   font-family:'Poppins',sans-serif;
-
-  background:linear-gradient(150deg,#ffe9f8,#ffd4ef,#ffb3df,#d7a8ff);
-  background-size:300% 300%;
-  animation:bgShift 16s infinite alternate ease-in-out;
+  background: radial-gradient(circle at center, #2e1065 0%, #0f051d 100%);
+  background-size: cover;
 }
 
-@keyframes bgShift{
-  0%{background-position:0 0;}
-  100%{background-position:100% 100%;}
-}
-
-/* 🎁 TITLE */
+/* 🌌 CREATIVE BTS TITLE */
 #title{
   position:fixed;
-  top:12px;
+  top:20px;
   width:100%;
   text-align:center;
-  font-size:clamp(20px,5vw,30px);
-  font-weight:700;
-  background:linear-gradient(90deg,#ff2fb2,#ff8ae6,#ffffff);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  z-index:100;
+  font-family: 'Dancing Script', cursive;
+  font-size:clamp(24px,7vw,45px);
+  background: linear-gradient(to right, #d8b4fe, #ffffff, #d8b4fe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 8px rgba(216, 180, 254, 0.6));
+  z-index: 1000;
+  pointer-events: none;
+  padding: 0 10px;
 }
 
-/* ⭐ STARS */
+/* ⭐ TWINKLING GALAXY */
 .star{
   position:fixed;
-  width:3px;height:3px;
   background:white;
   border-radius:50%;
-  animation:blink 2s infinite alternate;
+  animation: blink var(--d) infinite alternate;
 }
-@keyframes blink{
-  from{opacity:0.2;}
-  to{opacity:1;}
-}
+@keyframes blink{ from{opacity:0.2;} to{opacity:1;} }
 
-/* 🌸 FLOWERS */
-.flower{
-  position:fixed;
-  font-size:clamp(16px,4vw,22px);
-  animation:floatUp 12s linear forwards;
-}
-@keyframes floatUp{
-  from{transform:translateY(100vh);}
-  to{transform:translateY(-20vh) rotate(360deg);}
-}
-
-/* 📝 NOTES */
+/* 📝 DRAGGABLE POLAROIDS (Your Messages) */
 .sticky{
   position:absolute;
-  width:min(260px,85vw);
-  padding:16px;
-
-  background:linear-gradient(135deg,#ffffff,#ffe6f2);
-  border-radius:16px;
-
-  font-size:clamp(14px,3.5vw,17px);
-  line-height:1.5;
-  color:#4a2a3a;
-  white-space:pre-line;
-
-  box-shadow:0 10px 25px rgba(0,0,0,0.25);
-
-  opacity:0;
-  animation:notePOP 0.7s forwards;
-
-  cursor:grab;
-  touch-action:none;
-  z-index:10;
+  width:min(280px, 85vw);
+  max-height: 70vh; /* Prevents note from being longer than screen */
+  overflow-y: auto; /* Allows scrolling inside note if text is long on small phones */
+  padding:15px 15px 45px 15px; 
+  background: #ffffff;
+  border-radius: 2px;
+  font-size: clamp(13px, 3.5vw, 15px);
+  line-height: 1.6;
+  color: #1e1b4b;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  opacity: 0;
+  animation: notePOP 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  cursor: grab;
+  z-index: 10;
+  border: 1px solid rgba(0,0,0,0.05);
+  white-space: pre-line;
+  scrollbar-width: none; /* Hide scrollbar for aesthetics */
 }
+.sticky::-webkit-scrollbar { display: none; }
 
-@keyframes notePOP{
-  from{opacity:0; transform:scale(0.3);}
-  to{opacity:1; transform:scale(1) rotate(var(--rot));}
-}
+.sticky:active { cursor: grabbing; transform: scale(1.05); transition: transform 0.2s; }
 
-/* ✍️ CURSOR */
-.typing-cursor{
-  width:2px;
-  height:1em;
-  background:#ff2fb2;
-  display:inline-block;
-  animation:blink 1s infinite;
-}
+@keyframes notePOP{ from{opacity:0; transform:scale(0.5)} to{opacity:1; transform:scale(1) rotate(var(--rot))} }
 
-/* 🎉 BUTTON */
+/* 🎉 FINAL BUTTON */
 #nextBtn{
   display:none;
   position:fixed;
-  bottom:clamp(20px,6vh,60px);
-  left:50%;
+  bottom: 40px; left:50%;
   transform:translateX(-50%);
-  padding:12px 28px;
-  font-size:clamp(14px,4vw,18px);
-
-  background:white;
-  border-radius:30px;
-  color:#ff2fb2;
-  cursor:pointer;
-  z-index:50;
+  padding: 12px 35px;
+  font-size: 18px;
+  font-weight: 600;
+  background: #7c3aed;
+  border: 2px solid #fff;
+  border-radius: 50px;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0 30px rgba(124, 58, 237, 0.5);
+  z-index: 2000;
+  white-space: nowrap;
 }
 
-/* 🎁 POPUP */
+/* 🎁 CREATIVE FINAL POPUP */
 #popup{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,0.9);
+  background: rgba(15, 5, 29, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   display:none;
   justify-content:center;
   align-items:center;
   padding:20px;
-  z-index:99999;
+  z-index: 99999;
 }
 
 #popupBox{
-  width:100%;
-  max-width:360px;
-  background:white;
-  padding:24px;
-  border-radius:20px;
-  text-align:center;
-  color:#ff2fb2;
-  font-size:clamp(14px,4vw,18px);
+  width: 100%;
+  max-width: 400px;
+  background: #fff;
+  padding: clamp(25px, 8vw, 40px) 20px;
+  border-radius: 30px;
+  text-align: center;
+  border: 5px solid #a78bfa;
+  position: relative;
+  box-shadow: 0 0 60px rgba(167, 139, 250, 0.4);
 }
 
-/* 💥 BLAST */
-.bigSpark{
-  position:fixed;
-  width:18px;height:18px;
-  background:radial-gradient(circle,white,transparent);
-  border-radius:50%;
-  animation:blast 1.4s forwards;
+#popupBox h2 { 
+  font-family: 'Dancing Script', cursive; 
+  font-size: clamp(28px, 8vw, 36px); 
+  margin-bottom: 15px;
+  color: #6d28d9;
 }
-@keyframes blast{
-  to{transform:scale(4); opacity:0;}
+
+#popupBox p { font-size: clamp(14px, 4vw, 17px); color: #4b5563; line-height: 1.6; margin: 0; }
+
+/* 🎆 CELEBRATION PARTICLES */
+.particle {
+  position: fixed;
+  z-index: 100000;
+  pointer-events: none;
 }
 </style>
 </head>
 
 <body>
 
-<div id="title">Surprise Box 🎁</div>
-
-<div id="nextBtn">Final Wish 🎉</div>
+<div id="title">For the girl who deserves the whole galaxy 💛 </div>
+<button id="nextBtn">Open Final Wish! ✨</button>
 
 <div id="popup">
   <div id="popupBox">
@@ -170,45 +151,31 @@ body{
     <p>
       You mean more than words can say ✨<br>
       Thank you for being my chaos, comfort & happiness 💕<br>
-      Stay magical 🌸… always special<br>
-      Happy Birthday Once Again 🎂
+      Stay magical 🌸… always special<br><br>
+      <strong>Happy Birthday Once Again 🎂</strong>
     </p>
   </div>
 </div>
 
-<audio id="music" loop>
-  <source src="music1.mpeg">
-</audio>
+<audio id="music" loop><source src="music1.mpeg"></audio>
 
 <script>
-
 /* 🎵 MUSIC */
-document.addEventListener("click",()=>{
-  music.play().catch(()=>{});
-},{once:true});
+document.addEventListener("click", () => { document.getElementById("music").play().catch(()=>{}); }, {once:true});
 
-/* ⭐ STARS */
-for(let i=0;i<80;i++){
- let s=document.createElement("div");
- s.className="star";
- s.style.left=Math.random()*100+"vw";
- s.style.top=Math.random()*100+"vh";
- document.body.appendChild(s);
+/* ✨ GALAXY */
+for(let i=0; i<100; i++){
+  let s = document.createElement("div");
+  s.className="star";
+  let size = Math.random()*2.5;
+  s.style.width=size+"px"; s.style.height=size+"px";
+  s.style.left=Math.random()*100+"vw";
+  s.style.top=Math.random()*100+"vh";
+  s.style.setProperty("--d", (Math.random()*3+1)+"s");
+  document.body.appendChild(s);
 }
 
-/* 🌸 FLOWERS */
-setInterval(()=>{
- let f=document.createElement("div");
- f.className="flower";
- f.innerText=["🌸","🌺","🌼"][Math.floor(Math.random()*3)];
- f.style.left=Math.random()*100+"vw";
- document.body.appendChild(f);
- setTimeout(()=>f.remove(),12000);
-},700);
-
-/* 💖 MESSAGES */
-let msgs=[
-
+const msgs = [
 `These shoes 👟💖 are just a small gift…
 but your journey is something truly special ✨
 So always remember—
@@ -254,113 +221,133 @@ But you… you’re something truly special 💖✨
 Never forget that 🌸`
 ];
 
-/* 📍 RANDOM POSITIONS SAFE */
-function randomPos(){
-  return {
-    left:Math.random()*70 + 5 + "vw",
-    top:Math.random()*60 + 10 + "vh"
-  };
+/* 🖐️ DRAG LOGIC */
+function makeDraggable(el) {
+    let curX = 0, curY = 0;
+    
+    el.onmousedown = dragStart;
+    el.ontouchstart = dragStart;
+
+    function dragStart(e) {
+        // Prevent scrolling when trying to drag on mobile
+        if(e.type === "touchstart") {
+           curX = e.touches[0].clientX;
+           curY = e.touches[0].clientY;
+        } else {
+           curX = e.clientX;
+           curY = e.clientY;
+        }
+        document.onmouseup = dragEnd;
+        document.ontouchend = dragEnd;
+        document.onmousemove = dragMove;
+        document.ontouchmove = dragMove;
+        el.style.zIndex = 1001; 
+    }
+
+    function dragMove(e) {
+        e.preventDefault(); // Important for mobile dragging
+        let clientX = e.clientX || (e.touches ? e.touches[0].clientX : curX);
+        let clientY = e.clientY || (e.touches ? e.touches[0].clientY : curY);
+        
+        let moveX = curX - clientX;
+        let moveY = curY - clientY;
+        curX = clientX;
+        curY = clientY;
+        el.style.top = (el.offsetTop - moveY) + "px";
+        el.style.left = (el.offsetLeft - moveX) + "px";
+    }
+
+    function dragEnd() {
+        document.onmouseup = null; document.onmousemove = null;
+        document.ontouchend = null; document.ontouchmove = null;
+    }
 }
 
-/* 🖐️ DRAG (MOBILE + DESKTOP) */
-function makeDraggable(el){
- let isDown=false,offX=0,offY=0;
+/* ✍️ SEQUENCE */
+let msgIdx = 0;
+function showNext() {
+  if(msgIdx >= msgs.length) {
+    document.getElementById("nextBtn").style.display = "block";
+    return;
+  }
+  
+  let n = document.createElement("div");
+  n.className = "sticky";
+  
+  // Responsive positioning logic
+  let xBase = window.innerWidth < 600 ? 5 : 15;
+  let yBase = window.innerWidth < 600 ? 15 : 20;
+  
+  n.style.left = (xBase + (msgIdx * 7) % 30) + "vw";
+  n.style.top = (yBase + (msgIdx * 10) % 40) + "vh";
+  n.style.setProperty("--rot", (Math.random()*16-8)+"deg");
+  document.body.appendChild(n);
+  makeDraggable(n);
+  
+  let i = 0;
+  function type() {
+    if(i < msgs[msgIdx].length) {
+      n.innerHTML += msgs[msgIdx][i++];
+      setTimeout(type, 25);
+    } else {
+      msgIdx++;
+      setTimeout(showNext, 1200);
+    }
+  }
+  type();
+}
+window.onload = showNext;
 
- function start(e){
-  isDown=true;
-  let x=e.touches?e.touches[0].clientX:e.clientX;
-  let y=e.touches?e.touches[0].clientY:e.clientY;
-  offX=x-el.offsetLeft;
-  offY=y-el.offsetTop;
- }
+/* 🎆 CONTINUOUS CELEBRATION */
+function startCelebration() {
+    const icons = ["💜", "✨", "🌸", "⭐", "🎉"];
+    
+    // Continuous Rain
+    setInterval(() => {
+        let p = document.createElement("div");
+        p.className = "particle";
+        p.innerText = icons[Math.floor(Math.random()*icons.length)];
+        p.style.fontSize = Math.random()*20+20+"px";
+        p.style.left = Math.random()*100+"vw";
+        p.style.top = "-50px";
+        
+        p.animate([
+            { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+            { transform: `translateY(110vh) rotate(${Math.random()*720}deg)`, opacity: 0 }
+        ], { duration: 3000 + Math.random()*2000 });
+        
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 5000);
+    }, 150);
 
- function move(e){
-  if(!isDown) return;
-  e.preventDefault();
-  let x=e.touches?e.touches[0].clientX:e.clientX;
-  let y=e.touches?e.touches[0].clientY:e.clientY;
-  el.style.left=(x-offX)+"px";
-  el.style.top=(y-offY)+"px";
- }
+    // Continuous Explosions
+    setInterval(() => {
+        for(let i=0; i<15; i++) {
+            let p = document.createElement("div");
+            p.className = "particle";
+            p.innerText = icons[Math.floor(Math.random()*icons.length)];
+            p.style.left = "50%"; p.style.top = "50%";
+            let angle = Math.random() * Math.PI * 2;
+            let dist = Math.random() * (window.innerWidth < 600 ? 200 : 400) + 100;
+            
+            p.animate([
+                { transform: 'translate(0,0) scale(1)', opacity: 1 },
+                { transform: `translate(${Math.cos(angle)*dist}px, ${Math.sin(angle)*dist}px) scale(0)`, opacity: 0 }
+            ], { duration: 1500 });
 
- function end(){ isDown=false; }
-
- el.addEventListener("mousedown",start);
- el.addEventListener("touchstart",start);
-
- document.addEventListener("mousemove",move);
- document.addEventListener("touchmove",move,{passive:false});
-
- document.addEventListener("mouseup",end);
- document.addEventListener("touchend",end);
+            document.body.appendChild(p);
+            setTimeout(() => p.remove(), 1500);
+        }
+    }, 2000);
 }
 
-/* ✍️ FAST TYPING */
-function typeText(el,text,cb){
- let i=0;
-
- function t(){
-  if(i<text.length){
-   el.innerHTML += text[i];
-
-   let speed = 10;
-   if([".",",","…","—","।"].includes(text[i])) speed = 60;
-
-   i++;
-   setTimeout(t,speed);
-  } else cb && cb();
- }
-
- t();
-}
-
-/* 🎬 SEQUENCE */
-let i=0;
-
-function showNext(){
- if(i>=msgs.length){
-  nextBtn.style.display="block";
-  return;
- }
-
- let pos=randomPos();
-
- let n=document.createElement("div");
- n.className="sticky";
- n.style.left=pos.left;
- n.style.top=pos.top;
- n.style.setProperty("--rot",(Math.random()*8-4)+"deg");
-
- document.body.appendChild(n);
- makeDraggable(n);
-
- typeText(n,msgs[i],()=>{
-  i++;
-  setTimeout(showNext,400);
- });
-}
-
-showNext();
-
-/* 🎉 FINAL */
-nextBtn.onclick=()=>{
- document.querySelectorAll(".sticky").forEach(n=>n.remove());
-
- for(let i=0;i<60;i++){
-  let b=document.createElement("div");
-  b.className="bigSpark";
-  b.style.left=Math.random()*100+"vw";
-  b.style.top=Math.random()*100+"vh";
-  document.body.appendChild(b);
-  setTimeout(()=>b.remove(),1400);
- }
-
- setTimeout(()=>{
-  popup.style.display="flex";
- },700);
+const nextBtn = document.getElementById("nextBtn");
+nextBtn.onclick = () => {
+  nextBtn.style.display = "none";
+  document.getElementById("popup").style.display = "flex";
+  startCelebration();
 };
 
 </script>
-
 </body>
 </html>
