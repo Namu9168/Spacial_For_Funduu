@@ -43,6 +43,9 @@
             cursor: pointer;
             text-align: center;
             padding: 20px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            transition: opacity 0.8s ease;
         }
 
         #title {
@@ -57,11 +60,10 @@
             z-index: 50;
         }
 
-        /* THE ROPE */
         .rope-line {
             position: absolute;
             width: 90%;
-            height: 10vh; /* Responsive height */
+            height: 10vh;
             left: 5%;
             top: 15vh;
             border-bottom: 2px solid rgba(255, 255, 255, 0.2);
@@ -69,7 +71,6 @@
             z-index: 10;
         }
 
-        /* LIGHT BULBS */
         .bulb {
             position: absolute;
             width: 8px;
@@ -87,52 +88,32 @@
             to { opacity: 1; transform: scale(1.1); }
         }
 
-        /* HANGING PHOTOS */
         .photo-frame {
             position: absolute;
             transform-origin: top center;
             animation: hangSwing 5s infinite ease-in-out;
             cursor: pointer;
             z-index: 15;
-            transition: 0.3s;
         }
 
-        .photo-string {
-            width: 1px;
-            height: 30px;
-            background: rgba(255, 255, 255, 0.3);
-            margin: 0 auto;
-        }
-
-        .clip {
-            width: 12px;
-            height: 16px;
-            background: #222;
-            margin: -2px auto 0;
-            position: relative;
-            z-index: 16;
-        }
-
+        .photo-string { width: 1px; height: 30px; background: rgba(255, 255, 255, 0.3); margin: 0 auto; }
+        .clip { width: 12px; height: 16px; background: #222; margin: -2px auto 0; position: relative; z-index: 16; }
+        
         .photo-content {
             background: white;
             padding: 5px 5px 15px 5px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            width: clamp(70px, 18vw, 120px); /* Responsive photo size */
+            width: clamp(70px, 18vw, 120px);
             border-radius: 2px;
         }
 
-        .photo-content img {
-            width: 100%;
-            display: block;
-        }
+        .photo-content img { width: 100%; display: block; }
 
         @keyframes hangSwing {
-            0% { transform: rotate(-2deg); }
+            0%, 100% { transform: rotate(-2deg); }
             50% { transform: rotate(2deg); }
-            100% { transform: rotate(-2deg); }
         }
 
-        /* CELEBRATION BUTTON */
         #gift-btn {
             position: fixed;
             bottom: 40px;
@@ -141,31 +122,24 @@
             background: linear-gradient(45deg, var(--army-purple), #4a1e75);
             border: 1px solid var(--light-purple);
             color: white;
-            padding: 12px 30px;
+            padding: 12px 35px;
             border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
             z-index: 100;
-            white-space: nowrap;
         }
 
-        /* VIEWER */
         #viewer {
             position: fixed;
             inset: 0;
             background: rgba(0,0,0,0.95);
-            backdrop-filter: blur(10px);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 10000;
         }
 
-        #viewer img {
-            max-width: 90%;
-            max-height: 80vh;
-            border: 5px solid white;
-        }
+        #viewer img { max-width: 90%; max-height: 80vh; border: 5px solid white; }
     </style>
 </head>
 <body>
@@ -174,7 +148,7 @@
 <div id="title">Poohhhhhooooo.exe Running 💜</div>
 
 <audio id="music" loop>
-    <source src="music1.mpeg" type="audio/mpeg">
+    <source src="musci2.mpeg" type="audio/mpeg">
 </audio>
 
 <div id="canvas-container">
@@ -194,29 +168,23 @@
     const giftBtn = document.getElementById("gift-btn");
 
     start.onclick = () => {
-        music.play().catch(() => console.log("Music play blocked"));
-        start.style.transition = "0.5s";
+        music.currentTime = 7; // Starts at 7 seconds
+        music.play().catch(() => console.log("Play blocked"));
+        
         start.style.opacity = "0";
-        setTimeout(() => start.remove(), 500);
+        setTimeout(() => start.remove(), 800);
     };
 
-    // Responsive Rope Math
     function getRopeY(xPercent) {
         const rope = document.getElementById('rope');
         const rect = rope.getBoundingClientRect();
-        const width = rect.width;
-        const height = rect.height; // This is the 'sag'
+        const height = rect.height;
         const top = rect.top;
-
-        // Parabolic arc math based on percentage of width
-        // y = a(x-h)^2 + k where h is center (50%) and k is max sag (height)
         const normalizedX = (xPercent - 50);
         const sag = (normalizedX * normalizedX) * (height / 2500);
-        
         return top + height + sag;
     }
 
-    // 1. PLACE BULBS
     function initScene() {
         container.querySelectorAll('.bulb, .photo-frame').forEach(el => el.remove());
 
@@ -227,11 +195,9 @@
             bulb.className = "bulb";
             bulb.style.left = x + "%";
             bulb.style.top = (getRopeY(x) - 6) + "px";
-            bulb.style.animationDelay = (Math.random() * 2) + "s";
             container.appendChild(bulb);
         }
 
-        // 2. PLACE PHOTOS
         const photos = ["photo1.jpg", "photo2.jpg", "photo3.jpg", "photo4.jpg", "photo5.jpg"];
         const xPositions = [15, 32, 50, 68, 85];
 
@@ -239,21 +205,15 @@
             const x = xPositions[i];
             const frame = document.createElement("div");
             frame.className = "photo-frame";
-            
-            // Adjusting for center alignment
             const frameWidth = window.innerWidth < 600 ? 35 : 60; 
             frame.style.left = `calc(${x}% - ${frameWidth}px)`;
             frame.style.top = (getRopeY(x) - 5) + "px";
             frame.style.animationDelay = (i * 0.3) + "s";
-
             frame.innerHTML = `
                 <div class="photo-string"></div>
                 <div class="clip"></div>
-                <div class="photo-content">
-                    <img src="${src}" onerror="this.src='https://via.placeholder.com/150?text=Memory'">
-                </div>
+                <div class="photo-content"><img src="${src}" onerror="this.src='https://via.placeholder.com/150?text=Memory'"></div>
             `;
-
             frame.onclick = (e) => {
                 e.stopPropagation();
                 document.getElementById("vimg").src = src;
@@ -263,62 +223,12 @@
         });
     }
 
-    // Initial load
     window.addEventListener('load', initScene);
-    // Recalculate on resize (for desktop orientation changes)
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(initScene, 200);
-    });
+    window.addEventListener('resize', initScene);
 
-    // 3. CELEBRATION EFFECT
     giftBtn.onclick = () => {
-        for(let i=0; i<100; i++) {
-            const confetti = document.createElement("div");
-            confetti.style.position = "fixed";
-            confetti.style.zIndex = "1000";
-            confetti.style.pointerEvents = "none";
-            
-            const colors = ['#7D52AB', '#BB86FC', '#FFFFFF', '#FFD700'];
-            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-            
-            confetti.style.left = Math.random() * 100 + "vw";
-            confetti.style.top = "-10px";
-            confetti.style.width = "8px";
-            confetti.style.height = "8px";
-            confetti.style.borderRadius = "50%";
-            
-            document.body.appendChild(confetti);
-
-            const duration = Math.random() * 2 + 2;
-            confetti.animate([
-                { transform: 'translateY(0) rotate(0)', opacity: 1 },
-                { transform: `translate(${(Math.random() - 0.5) * 200}px, ${window.innerHeight}px) rotate(720deg)`, opacity: 0 }
-            ], { duration: duration * 1000, ease: 'linear' }).onfinish = () => confetti.remove();
-        }
-
-        setTimeout(() => {
-            window.location.href = "gift.html";
-        }, 3000);
+        window.location.href = "gift.html";
     };
-
-    // Galaxy Sparkles
-    setInterval(() => {
-        const star = document.createElement("div");
-        star.innerHTML = "✨";
-        star.style.position = "fixed";
-        star.style.left = Math.random() * 100 + "vw";
-        star.style.top = "100vh";
-        star.style.fontSize = "12px";
-        star.style.zIndex = "1";
-        document.body.appendChild(star);
-        
-        star.animate([
-            { transform: 'translateY(0)', opacity: 1 },
-            { transform: `translateY(-110vh)`, opacity: 0 }
-        ], { duration: 5000 + Math.random() * 3000 }).onfinish = () => star.remove();
-    }, 600);
 </script>
 
 </body>
