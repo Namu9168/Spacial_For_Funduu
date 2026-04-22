@@ -1,234 +1,360 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Borahae Memories 💜</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Borahae Memories 💜</title>
 
-    <style>
-        :root {
-            --army-purple: #7D52AB;
-            --light-purple: #BB86FC;
-            --dark-bg: #0f0514;
-        }
+<link rel="stylesheet"
+href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap">
 
-        body {
-            margin: 0;
-            overflow: hidden;
-            background: radial-gradient(circle at center, #1a0a2e, #0f0514, #000000);
-            font-family: 'Poppins', sans-serif;
-            height: 100vh;
-            color: white;
-            touch-action: manipulation;
-        }
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-        body::after {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.8) 100%);
-            pointer-events: none;
-            z-index: 5;
-        }
+<style>
+:root {
+    --army-purple: #7D52AB;
+    --light-purple: #BB86FC;
+    --gold: #FFD700;
+}
 
-        #start {
-            position: fixed;
-            inset: 0;
-            background: black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            cursor: pointer;
-            text-align: center;
-            padding: 20px;
-            font-family: 'Dancing Script', cursive;
-            font-size: 2rem;
-            transition: opacity 0.8s ease;
-        }
+body {
+    margin: 0;
+    overflow: hidden;
+    height: 100vh;
+    background: radial-gradient(circle at center, #1a0a2e, #0f0514, #000);
+    font-family: 'Poppins', sans-serif;
+    color: white;
+}
 
-        #title {
-            position: fixed;
-            top: 20px;
-            width: 100%;
-            text-align: center;
-            font-family: 'Dancing Script', cursive;
-            font-size: clamp(1.8rem, 6vw, 2.8rem);
-            color: var(--light-purple);
-            text-shadow: 0 0 20px var(--army-purple);
-            z-index: 50;
-        }
+/* START OVERLAY */
+#start {
+    position: fixed;
+    inset: 0;
+    background: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    cursor: pointer;
+    z-index: 10000;
+    transition: 0.8s ease;
+}
 
-        .rope-line {
-            position: absolute;
-            width: 90%;
-            height: 10vh;
-            left: 5%;
-            top: 15vh;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 0 0 50% 50%;
-            z-index: 10;
-        }
+#start span {
+    font-size: 1rem;
+    font-family: 'Poppins';
+    letter-spacing: 4px;
+    margin-top: 10px;
+    opacity: 0.6;
+}
 
-        .bulb {
-            position: absolute;
-            width: 8px;
-            height: 12px;
-            background: #fff;
-            border-radius: 50% 50% 40% 40%;
-            box-shadow: 0 0 10px #fff, 0 0 20px var(--light-purple);
-            animation: glow 1.5s infinite alternate ease-in-out;
-            z-index: 11;
-            transform-origin: top center;
-        }
+/* SHIMMER TITLE */
+#title {
+    position: fixed;
+    top: 20px;
+    width: 100%;
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    background: linear-gradient(90deg, var(--army-purple), var(--light-purple), #fff, var(--light-purple), var(--army-purple));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 4s linear infinite;
+    z-index: 50;
+}
 
-        @keyframes glow {
-            from { opacity: 0.5; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1.1); }
-        }
+@keyframes shimmer {
+    to { background-position: 200% center; }
+}
 
-        .photo-frame {
-            position: absolute;
-            transform-origin: top center;
-            animation: hangSwing 5s infinite ease-in-out;
-            cursor: pointer;
-            z-index: 15;
-        }
+/* FILM ROLL SLIDESHOW */
+.film-outer {
+    position: absolute;
+    top: 42%;
+    transform: translateY(-50%);
+    width: 100%;
+    overflow: hidden;
+    padding: 60px 0;
+    background: rgba(255, 255, 255, 0.02);
+    border-top: 1px solid rgba(187, 134, 252, 0.1);
+    border-bottom: 1px solid rgba(187, 134, 252, 0.1);
+}
 
-        .photo-string { width: 1px; height: 30px; background: rgba(255, 255, 255, 0.3); margin: 0 auto; }
-        .clip { width: 12px; height: 16px; background: #222; margin: -2px auto 0; position: relative; z-index: 16; }
-        
-        .photo-content {
-            background: white;
-            padding: 5px 5px 15px 5px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            width: clamp(70px, 18vw, 120px);
-            border-radius: 2px;
-        }
+.film-track {
+    display: flex;
+    animation: scroll 35s linear infinite;
+}
 
-        .photo-content img { width: 100%; display: block; }
+.film-track:hover { animation-play-state: paused; }
 
-        @keyframes hangSwing {
-            0%, 100% { transform: rotate(-2deg); }
-            50% { transform: rotate(2deg); }
-        }
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
 
-        #gift-btn {
-            position: fixed;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(45deg, var(--army-purple), #4a1e75);
-            border: 1px solid var(--light-purple);
-            color: white;
-            padding: 12px 35px;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            z-index: 100;
-        }
+.photo {
+    flex-shrink: 0;
+    width: 280px;
+    height: 360px;
+    margin: 0 25px;
+    background: white;
+    padding: 12px;
+    border-radius: 6px;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.8);
+    transform: rotate(var(--r));
+    transition: 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
 
-        #viewer {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.95);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-        }
+.photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-        #viewer img { max-width: 90%; max-height: 80vh; border: 5px solid white; }
-    </style>
+.photo:hover {
+    transform: rotate(0deg) scale(1.1) translateY(-20px) !important;
+    box-shadow: 0 20px 60px var(--army-purple);
+    z-index: 100;
+}
+
+/* FALLING STARS */
+.star {
+    position: fixed;
+    top: -10px;
+    background: white;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to { transform: translateY(105vh); opacity: 0; }
+}
+
+/* GLASSMORPHISM BOTTOM LANE */
+.bottom-lane {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(15, 5, 20, 0.7);
+    backdrop-filter: blur(15px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px 0;
+    z-index: 500;
+}
+
+#gift-btn {
+    padding: 15px 50px;
+    margin-bottom: 25px;
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: linear-gradient(45deg, var(--army-purple), #5e338c);
+    color: white;
+    font-weight: 600;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    transition: 0.4s;
+}
+
+/* ANIMATED STICKER ROW */
+.sticker-row {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 35px;
+    width: 95%;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 10px 20px;
+}
+
+.sticker-row::-webkit-scrollbar { display: none; }
+
+.sticker-row img {
+    height: 90px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 8px var(--army-purple));
+    transition: 0.5s;
+    animation: float 4s ease-in-out infinite;
+    animation-delay: var(--d);
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.sticker-row img:hover {
+    transform: scale(1.4) rotate(10deg) !important;
+    filter: drop-shadow(0 0 15px var(--light-purple)) brightness(1.2);
+}
+
+/* PREMIUM POPUP MODAL */
+#popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 20000;
+    backdrop-filter: blur(20px);
+}
+
+.magic-card {
+    background: linear-gradient(135deg, #1a0a2e 0%, #0f0514 100%);
+    border: 1px solid rgba(187, 134, 252, 0.3);
+    padding: 50px;
+    border-radius: 30px;
+    text-align: center;
+    max-width: 450px;
+    width: 85%;
+    box-shadow: 0 0 100px rgba(125, 82, 171, 0.4);
+    transform: translateY(50px);
+    opacity: 0;
+    transition: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#popup-overlay.active .magic-card {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.magic-card h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: var(--gold);
+}
+
+.next-page-btn {
+    padding: 15px 45px;
+    background: var(--light-purple);
+    color: #1a0a2e;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+</style>
 </head>
+
 <body>
 
-<div id="start">TAP TO ENTER THE MAGIC SHOP 💜</div>
+<div id="start">
+    TAP TO ENTER 💜
+    <span>ENABLE SOUND</span>
+</div>
+
 <div id="title">Poohhhhhooooo.exe Running 💜</div>
 
 <audio id="music" loop>
     <source src="music2.mpeg" type="audio/mpeg">
 </audio>
 
-<div id="canvas-container">
-    <div class="rope-line" id="rope"></div>
+<div class="film-outer">
+    <div class="film-track" id="track"></div>
 </div>
 
-<div id="viewer" onclick="this.style.display='none'">
-    <img id="vimg" src="">
+<div class="bottom-lane">
+    <button id="gift-btn">CELEBRATE OUR MAGIC ✨</button>
+    <div class="sticker-row" id="sticker-container">
+        <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3V5NmxucWthZGxwMTVrbmphZ2lqdzJyOWM4Z24xZDBnZWgzZGd6bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/2ffOPHJ4xYc6mheQoi/giphy.gif" style="--d: 0.1s">
+        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dnhnZWRvZzZ4dzhuZWlnaGpvNDdoNW54amowZXhjNjFwZTE2d2F4dSZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/igS7vtu2yeOIHaDCa3/giphy.gif" style="--d: 0.3s">
+        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eXpuOHR1Z3k2djg0YWE1MjR4ODlvYjFnaXc1ZG9ncGd5MG8zdTBpZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/98A6QYUPnNv4zpeGIp/giphy.gif" style="--d: 0.5s">
+        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eXpuOHR1Z3k2djg0YWE1MjR4ODlvYjFnaXc1ZG9ncGd5MG8zdTBpZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/RRtgLyAruCVLJDaZzq/giphy.gif" style="--d: 0.7s">
+        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eXpuOHR1Z3k2djg0YWE1MjR4ODlvYjFnaXc1ZG9ncGd5MG8zdTBpZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/w7eLtyVyDW8fxkdjFe/giphy.gif" style="--d: 0.9s">
+        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eXpuOHR1Z3k2djg0YWE1MjR4ODlvYjFnaXc1ZG9ncGd5MG8zdTBpZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/VQsIQ6LzyGw17gTgDC/giphy.gif" style="--d: 1.1s">
+        <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExOW42dGcyc3NoZzZ5djNrZGRubnhienVjZTM2M2c0Z3FvaTcxazFkayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/6yGj6iFuMc3lDkyYxW/giphy.gif" style="--d: 1.3s">
+        <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdzVzdmpmc2p5dmRhbXU2YmozY2N4bTZwZ2lrNnQ1OGNqOWRwdHFjaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/BJJFCHjcVJMu6mv4qP/giphy.gif" style="--d: 1.5s">
+        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NXU3NzFhdW10dXhhZHlhdGYwbTdrNGpoZnBlZjFtOXdzcWJ0cHN4eiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/SpnJFOpgxhh4LFqhau/giphy.gif" style="--d: 1.7s">
+        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NjFkaG90MnZheXFrbDRrZHpmdnRmcjlmcHU3dTN3ZGlnaXQyM250OSZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/3NOrDakyzzMTrpx9Uk/giphy.gif" style="--d: 1.9s">
+        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3YTR6eHBrdWt2cHBkaGM5b3dnYXoxOWRzamM4d21ybnNpZTRmdWltayZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/zPsVhL3rdwCLwj9E1Z/giphy.gif" style="--d: 2.1s">
+        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3bmE5amljNWs5eXFrZmNkM3NxdjljM3BoZzVmNm4xOXB2dmVnZHFlYiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/xiVB19kvingDVGXdxX/giphy.gif" style="--d: 2.3s">
+        <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExODIzb3JzdzlpZnJrZW9mZzNjdjgwcjgyNjM5NDJoamhqdzV0ZzlyZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/zCBrRpn4UO2rLl5Z1g/giphy.gif" style="--d: 2.5s">
+        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3N3JobXo4NGxvbDY4M2R3eWF3OWF6enNtMXFtdzg1YjBmcWNqOG84eiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/50aeLgKPplVYIqSBA2/giphy.gif" style="--d: 2.7s">
+    </div>
 </div>
 
-<button id="gift-btn">CELEBRATE OUR MAGIC ✨</button>
+<div id="popup-overlay">
+    <div class="magic-card">
+        <h2>Borahae! 💜</h2>
+        <p>A new chapter of magic is waiting for you. Are you ready for the next surprise?</p>
+        <button class="next-page-btn" onclick="goToNextPage()">OPEN SURPRISE ✨</button>
+    </div>
+</div>
 
 <script>
-    const music = document.getElementById("music");
-    const start = document.getElementById("start");
-    const container = document.getElementById("canvas-container");
-    const giftBtn = document.getElementById("gift-btn");
+const start = document.getElementById("start");
+const music = document.getElementById("music");
+const track = document.getElementById("track");
+const popup = document.getElementById("popup-overlay");
 
-    start.onclick = () => {
-        music.currentTime = 7; // Starts at 7 seconds
-        music.play().catch(() => console.log("Play blocked"));
-        
-        start.style.opacity = "0";
-        setTimeout(() => start.remove(), 800);
-    };
+// 1. Setup Film Roll
+const images = ["photo1.jpg", "photo2.jpg", "photo3.jpg", "photo4.jpg", "photo5.jpg"];
+function populateTrack() {
+    const combined = [...images, ...images, ...images, ...images]; 
+    combined.forEach(src => {
+        const div = document.createElement('div');
+        div.className = 'photo';
+        div.style.setProperty('--r', (Math.random() * 10 - 5) + 'deg');
+        div.innerHTML = `<img src="${src}">`;
+        track.appendChild(div);
+    });
+}
+populateTrack();
 
-    function getRopeY(xPercent) {
-        const rope = document.getElementById('rope');
-        const rect = rope.getBoundingClientRect();
-        const height = rect.height;
-        const top = rect.top;
-        const normalizedX = (xPercent - 50);
-        const sag = (normalizedX * normalizedX) * (height / 2500);
-        return top + height + sag;
-    }
+// 2. Start Logic
+start.onclick = () => {
+    start.style.opacity = "0";
+    setTimeout(() => start.style.display = "none", 800);
+    music.play().catch(()=>{});
+    setInterval(createStar, 120);
+};
 
-    function initScene() {
-        container.querySelectorAll('.bulb, .photo-frame').forEach(el => el.remove());
+// 3. Falling Stars
+function createStar() {
+    const star = document.createElement("div");
+    const size = Math.random() * 4 + 2 + "px";
+    star.className = "star";
+    star.style.width = size;
+    star.style.height = size;
+    star.style.left = Math.random() * 100 + "vw";
+    const colors = ["#fff", "#BB86FC", "#FFD700", "#7D52AB"];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    star.style.background = color;
+    star.style.boxShadow = `0 0 10px ${color}`;
+    star.style.animationDuration = (Math.random() * 3 + 4) + "s";
+    document.body.appendChild(star);
+    setTimeout(() => star.remove(), 6000);
+}
 
-        const bulbCount = window.innerWidth < 600 ? 12 : 25;
-        for(let i=0; i<=bulbCount; i++) {
-            let x = 5 + (i * (90/bulbCount));
-            let bulb = document.createElement("div");
-            bulb.className = "bulb";
-            bulb.style.left = x + "%";
-            bulb.style.top = (getRopeY(x) - 6) + "px";
-            container.appendChild(bulb);
-        }
+// 4. Celebration Logic
+document.getElementById('gift-btn').onclick = () => {
+    confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#7D52AB', '#BB86FC', '#FFD700', '#ffffff']
+    });
 
-        const photos = ["photo1.jpeg", "photo2.jpeg", "photo3.jpeg", "photo4.jpeg", "photo5.jpeg"];
-        const xPositions = [15, 32, 50, 68, 85];
+    popup.style.display = "flex";
+    setTimeout(() => popup.classList.add("active"), 10);
+};
 
-        photos.forEach((src, i) => {
-            const x = xPositions[i];
-            const frame = document.createElement("div");
-            frame.className = "photo-frame";
-            const frameWidth = window.innerWidth < 600 ? 35 : 60; 
-            frame.style.left = `calc(${x}% - ${frameWidth}px)`;
-            frame.style.top = (getRopeY(x) - 5) + "px";
-            frame.style.animationDelay = (i * 0.3) + "s";
-            frame.innerHTML = `
-                <div class="photo-string"></div>
-                <div class="clip"></div>
-                <div class="photo-content"><img src="${src}" onerror="this.src='https://via.placeholder.com/150?text=Memory'"></div>
-            `;
-            frame.onclick = (e) => {
-                e.stopPropagation();
-                document.getElementById("vimg").src = src;
-                document.getElementById("viewer").style.display = "flex";
-            };
-            container.appendChild(frame);
-        });
-    }
-
-    window.addEventListener('load', initScene);
-    window.addEventListener('resize', initScene);
-
-    giftBtn.onclick = () => {
-        window.location.href = "gift.html";
-    };
+function goToNextPage() {
+    window.location.href = 'gift.html';
+}
 </script>
 
 </body>
