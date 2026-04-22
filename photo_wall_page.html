@@ -85,14 +85,15 @@ body {
 
 .film-track {
     display: flex;
-    animation: scroll 35s linear infinite;
+    width: max-content; /* Critical for smooth scrolling */
+    animation: scroll 40s linear infinite;
 }
 
 .film-track:hover { animation-play-state: paused; }
 
 @keyframes scroll {
     0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    100% { transform: translateX(-50%); } /* Resets halfway through the double-set */
 }
 
 .photo {
@@ -274,15 +275,6 @@ body {
         <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eXpuOHR1Z3k2djg0YWE1MjR4ODlvYjFnaXc1ZG9ncGd5MG8zdTBpZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/98A6QYUPnNv4zpeGIp/giphy.gif" style="--d: 0.5s">
         <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eXpuOHR1Z3k2djg0YWE1MjR4ODlvYjFnaXc1ZG9ncGd5MG8zdTBpZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/RRtgLyAruCVLJDaZzq/giphy.gif" style="--d: 0.7s">
         <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eXpuOHR1Z3k2djg0YWE1MjR4ODlvYjFnaXc1ZG9ncGd5MG8zdTBpZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/w7eLtyVyDW8fxkdjFe/giphy.gif" style="--d: 0.9s">
-        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eXpuOHR1Z3k2djg0YWE1MjR4ODlvYjFnaXc1ZG9ncGd5MG8zdTBpZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/VQsIQ6LzyGw17gTgDC/giphy.gif" style="--d: 1.1s">
-        <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExOW42dGcyc3NoZzZ5djNrZGRubnhienVjZTM2M2c0Z3FvaTcxazFkayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/6yGj6iFuMc3lDkyYxW/giphy.gif" style="--d: 1.3s">
-        <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdzVzdmpmc2p5dmRhbXU2YmozY2N4bTZwZ2lrNnQ1OGNqOWRwdHFjaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/BJJFCHjcVJMu6mv4qP/giphy.gif" style="--d: 1.5s">
-        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NXU3NzFhdW10dXhhZHlhdGYwbTdrNGpoZnBlZjFtOXdzcWJ0cHN4eiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/SpnJFOpgxhh4LFqhau/giphy.gif" style="--d: 1.7s">
-        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NjFkaG90MnZheXFrbDRrZHpmdnRmcjlmcHU3dTN3ZGlnaXQyM250OSZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/3NOrDakyzzMTrpx9Uk/giphy.gif" style="--d: 1.9s">
-        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3YTR6eHBrdWt2cHBkaGM5b3dnYXoxOWRzamM4d21ybnNpZTRmdWltayZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/zPsVhL3rdwCLwj9E1Z/giphy.gif" style="--d: 2.1s">
-        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3bmE5amljNWs5eXFrZmNkM3NxdjljM3BoZzVmNm4xOXB2dmVnZHFlYiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/xiVB19kvingDVGXdxX/giphy.gif" style="--d: 2.3s">
-        <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExODIzb3JzdzlpZnJrZW9mZzNjdjgwcjgyNjM5NDJoamhqdzV0ZzlyZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/zCBrRpn4UO2rLl5Z1g/giphy.gif" style="--d: 2.5s">
-        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3N3JobXo4NGxvbDY4M2R3eWF3OWF6enNtMXFtdzg1YjBmcWNqOG84eiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/50aeLgKPplVYIqSBA2/giphy.gif" style="--d: 2.7s">
     </div>
 </div>
 
@@ -300,23 +292,25 @@ const music = document.getElementById("music");
 const track = document.getElementById("track");
 const popup = document.getElementById("popup-overlay");
 
-// 1. Setup Film Roll - FIXED MISSING COMMAS
+// 1. Setup Film Roll - Cleaned up naming and logic
 const images = [
-    "Photo1.jpeg", "photo2.jpeg", "photo3.jpeg", "photo4.jpeg", "photo5.jpeg",
-    "Photo6.jpeg", "Photo7.jpeg", "Photo8.jpeg", "Photo9.jpeg", "Photo10.jpeg",
-    "Photo11.jpeg", "Photo12.jpeg", "Photo13.jpeg", "Photo14.jpeg", "Photo15.jpeg",
-    "Photo16.jpeg", "Photo17.jpeg"
+    "photo1.jpeg", "photo2.jpeg", "photo3.jpeg", "photo4.jpeg", "photo5.jpeg",
+    "photo6.jpeg", "photo7.jpeg", "photo8.jpeg", "photo9.jpeg", "photo10.jpeg",
+    "photo11.jpeg", "photo12.jpeg", "photo13.jpeg", "photo14.jpeg", "photo15.jpeg",
+    "photo16.jpeg", "photo17.jpeg"
 ];
 
 function populateTrack() {
-    // Clone images so the infinite scroll works smoothly
-    const combined = [...images, ...images, ...images, ...images]; 
+    // Cloning twice creates the seamless loop (A...B then A...B)
+    // The animation shifts by 50% so when it hits the end of set 2, 
+    // it snaps back to start of set 1 instantly.
+    const combined = [...images, ...images]; 
     combined.forEach(src => {
         const div = document.createElement('div');
         div.className = 'photo';
-        div.style.setProperty('--r', (Math.random() * 10 - 5) + 'deg');
-        // Added standard styling to ensure images fit the polaroid container
-        div.innerHTML = `<img src="${src}" style="width:100%; height:100%; object-fit:cover;">`;
+        div.style.setProperty('--r', (Math.random() * 8 - 4) + 'deg');
+        // Added lazy loading to prevent browser memory drops
+        div.innerHTML = `<img src="${src}" loading="lazy" alt="Memory">`;
         track.appendChild(div);
     });
 }
@@ -327,13 +321,13 @@ start.onclick = () => {
     start.style.opacity = "0";
     setTimeout(() => start.style.display = "none", 800);
     music.play().catch(()=>{});
-    setInterval(createStar, 120);
+    setInterval(createStar, 150);
 };
 
 // 3. Falling Stars
 function createStar() {
     const star = document.createElement("div");
-    const size = Math.random() * 4 + 2 + "px";
+    const size = Math.random() * 3 + 2 + "px";
     star.className = "star";
     star.style.width = size;
     star.style.height = size;
@@ -344,7 +338,7 @@ function createStar() {
     star.style.boxShadow = `0 0 10px ${color}`;
     star.style.animationDuration = (Math.random() * 3 + 4) + "s";
     document.body.appendChild(star);
-    setTimeout(() => star.remove(), 6000);
+    setTimeout(() => star.remove(), 7000);
 }
 
 // 4. Celebration Logic
@@ -357,7 +351,7 @@ document.getElementById('gift-btn').onclick = () => {
     });
 
     popup.style.display = "flex";
-    setTimeout(() => popup.classList.add("active"), 10);
+    setTimeout(() => popup.classList.add("active"), 50);
 };
 
 function goToNextPage() {
