@@ -3,138 +3,164 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>The Magic Shop Finale 💜</title>
+<title>For the girl who deserves the whole galaxy 💛</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap');
 
 *{
   box-sizing:border-box;
-  touch-action: manipulation; 
+  touch-action: none; 
 }
 
-body{
-  margin:0;
-  overflow:hidden;
-  height:100vh;
+body {
+  margin: 0;
+  overflow: hidden;
+  height: 100vh;
   width: 100vw;
-  font-family:'Poppins',sans-serif;
-  background: radial-gradient(circle at center, #1e0b44 0%, #070214 100%);
+  font-family: 'Poppins', sans-serif;
+  background: #05010d; /* Deep Space Black */
+  background: radial-gradient(circle at center, #1a083d 0%, #05010d 100%);
+  color: #fff;
 }
 
-/* 🌌 TITLE SECTION */
-#title{
-  position:fixed;
-  top:30px;
-  width:100%;
-  text-align:center;
+/* 🌌 NEON GALAXY TITLE */
+#title {
+  position: fixed;
+  top: 40px;
+  width: 100%;
+  text-align: center;
   font-family: 'Dancing Script', cursive;
-  font-size:clamp(22px,7vw,42px);
-  background: linear-gradient(to bottom, #f3e8ff, #c084fc);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 10px rgba(192, 132, 252, 0.5));
+  font-size: clamp(26px, 8vw, 52px);
+  color: #fff;
+  text-shadow: 0 0 10px #bc6ff1, 0 0 20px #bc6ff1, 0 0 40px #bc6ff1;
   z-index: 1000;
   pointer-events: none;
-  padding: 0 20px;
 }
 
-/* ⭐ GALAXY BACKGROUND */
-.star{
-  position:fixed;
-  background:white;
-  border-radius:50%;
+/* ⭐ TWINKLING STARS */
+.star {
+  position: fixed;
+  background: white;
+  border-radius: 50%;
   z-index: 1;
   animation: blink var(--d) infinite alternate;
 }
-@keyframes blink{ from{opacity:0.1;} to{opacity:0.8;} }
+@keyframes blink { from { opacity: 0.1; transform: scale(0.5); } to { opacity: 1; transform: scale(1.2); } }
 
-/* 📝 EXPANDED POLAROIDS */
-.sticky{
-  position:absolute;
-  width:min(340px, 85vw); /* Slightly wider for longer messages */
-  min-height: 200px;
-  max-height: 75vh;
-  overflow-y: auto;
-  padding: 25px 25px 50px 25px; 
-  background: #ffffff;
-  border-radius: 2px;
-  font-size: clamp(15px, 4vw, 17px);
+/* 📝 IRIDESCENT GLASS CARDS */
+.sticky {
+  position: absolute;
+  width: min(350px, 88vw);
+  min-height: 220px;
+  max-height: 70vh;
+  padding: 30px;
+  /* Glassmorphism with Iridescent Border */
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  
+  font-size: clamp(15px, 4.2vw, 17px);
   line-height: 1.8;
-  color: #1a1a1a;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+  color: #e0e0e0;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
   opacity: 0;
   cursor: grab;
   z-index: 100;
-  border-bottom: 30px solid #f8f8f8; /* Polaroid effect */
   white-space: pre-line;
   scrollbar-width: none;
-}
-.sticky::-webkit-scrollbar { display: none; }
-.sticky:active { cursor: grabbing; transform: scale(1.02); transition: 0.2s; }
-
-@keyframes notePOP{ 
-    from{opacity:0; transform:scale(0.8) translateY(20px) rotate(0deg)} 
-    to{opacity:1; transform:scale(1) translateY(0) rotate(var(--rot))} 
+  user-select: none;
+  
+  /* Constant Floating Animation */
+  animation: notePOP 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, 
+             float 4s ease-in-out infinite alternate;
 }
 
-/* 🎉 BUTTON */
-#nextBtn{
-  display:none;
-  position:fixed;
-  bottom: 60px; left:50%;
-  transform:translateX(-50%);
-  padding: 18px 50px;
+@keyframes float {
+  from { transform: translateY(0px) rotate(var(--rot)); }
+  to { transform: translateY(-10px) rotate(var(--rot)); }
+}
+
+.sticky:active {
+  cursor: grabbing;
+  border: 1px solid rgba(188, 111, 241, 0.5);
+  box-shadow: 0 0 30px rgba(188, 111, 241, 0.3);
+}
+
+@keyframes notePOP { 
+    from { opacity: 0; transform: scale(0.8) translateY(30px); } 
+    to { opacity: 1; transform: scale(1) translateY(0); } 
+}
+
+/* ✨ NEON GLOW TEXT FOR MARATHI */
+.highlight-text {
+  color: #bc6ff1;
+  text-shadow: 0 0 5px rgba(188, 111, 241, 0.5);
+}
+
+/* 🎉 CYBER-PURPLE BUTTON */
+#nextBtn {
+  display: none;
+  position: fixed;
+  bottom: 60px; left: 50%;
+  transform: translateX(-50%);
+  padding: 15px 45px;
   font-size: 20px;
   font-weight: 600;
-  background: #9333ea;
-  border: none;
-  border-radius: 50px;
-  color: white;
+  background: transparent;
+  border: 2px solid #bc6ff1;
+  border-radius: 10px;
+  color: #bc6ff1;
   cursor: pointer;
-  box-shadow: 0 0 40px rgba(147, 51, 234, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 0 15px rgba(188, 111, 241, 0.4);
   z-index: 2000;
-  animation: pulse 2s infinite;
-}
-@keyframes pulse {
-  0% { transform: translateX(-50%) scale(1); }
-  50% { transform: translateX(-50%) scale(1.05); }
-  100% { transform: translateX(-50%) scale(1); }
+  transition: 0.3s;
 }
 
-/* 🎁 FINAL POPUP */
-#popup{
-  position:fixed;
-  inset:0;
-  background: rgba(7, 2, 20, 0.95);
+#nextBtn:hover {
+  background: #bc6ff1;
+  color: #fff;
+  box-shadow: 0 0 40px #bc6ff1;
+}
+
+/* 🎁 FINAL POPUP - DARK LUXE */
+#popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 1, 13, 0.95);
   backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
   z-index: 99999;
 }
 
-#popupBox{
+#popupBox {
   width: 100%;
   max-width: 450px;
-  background: #fff;
-  padding: 50px 30px;
-  border-radius: 40px;
+  background: linear-gradient(145deg, #13032d, #05010d);
+  padding: 60px 30px;
+  border-radius: 30px;
   text-align: center;
-  border: 2px solid #ddd;
-  box-shadow: 0 0 100px rgba(167, 139, 250, 0.3);
+  border: 1px solid rgba(188, 111, 241, 0.3);
+  box-shadow: 0 0 100px rgba(188, 111, 241, 0.2);
 }
 
 #popupBox h2 { 
   font-family: 'Dancing Script', cursive; 
-  font-size: clamp(32px, 10vw, 45px); 
+  font-size: clamp(34px, 11vw, 48px); 
   margin-bottom: 20px;
-  color: #5b21b6;
+  background: linear-gradient(to right, #bc6ff1, #f472b6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-#popupBox p { font-size: 18px; color: #374151; line-height: 1.8; }
+#popupBox p { font-size: 17px; color: #b0b0b0; line-height: 1.8; }
 
 .particle {
   position: fixed;
@@ -147,7 +173,7 @@ body{
 <body>
 
 <div id="title">For the girl who deserves the whole galaxy 💛</div>
-<button id="nextBtn">The Final Wish ✨</button>
+<button id="nextBtn">Reveal Final Secret ✨</button>
 
 <div id="popup">
   <div id="popupBox">
@@ -164,22 +190,26 @@ body{
 <audio id="music" loop><source src="music3.mpeg"></audio>
 
 <script>
+let maxZ = 1500;
+
 document.addEventListener("click", () => { 
     const audio = document.getElementById("music");
     audio.play().catch(() => {}); 
 }, {once:true});
 
-for(let i=0; i<120; i++){
+// Galaxy Generation
+for(let i=0; i<150; i++){
   let s = document.createElement("div");
   s.className="star";
-  let size = Math.random()*2.5;
+  let size = Math.random()*2;
   s.style.width=size+"px"; s.style.height=size+"px";
   s.style.left=Math.random()*100+"vw";
   s.style.top=Math.random()*100+"vh";
-  s.style.setProperty("--d", (Math.random()*4+2)+"s");
+  s.style.setProperty("--d", (Math.random()*4+1)+"s");
   document.body.appendChild(s);
 }
 
+// Your exact messages
 const msgs = [
 `These shoes 👟💖 are just a small gift,
 but the path you walk is something truly special. ✨
@@ -247,37 +277,39 @@ Thank you for being in my life. Never forget your worth. 🌸`
 ];
 
 function makeDraggable(el) {
-    let curX = 0, curY = 0;
-    el.onmousedown = dragStart;
-    el.ontouchstart = dragStart;
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    el.onmousedown = dragMouseDown;
+    el.ontouchstart = dragMouseDown;
 
-    function dragStart(e) {
-        el.style.zIndex = 1500;
-        if(e.type === "touchstart") {
-           curX = e.touches[0].clientX;
-           curY = e.touches[0].clientY;
+    function dragMouseDown(e) {
+        maxZ++;
+        el.style.zIndex = maxZ;
+        if (e.type === 'touchstart') {
+            pos3 = e.touches[0].clientX;
+            pos4 = e.touches[0].clientY;
         } else {
-           curX = e.clientX;
-           curY = e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
         }
-        document.onmouseup = dragEnd;
-        document.ontouchend = dragEnd;
-        document.onmousemove = dragMove;
-        document.ontouchmove = dragMove;
+        document.onmouseup = closeDragElement;
+        document.ontouchend = closeDragElement;
+        document.onmousemove = elementDrag;
+        document.ontouchmove = elementDrag;
     }
 
-    function dragMove(e) {
-        let clientX = e.clientX || (e.touches ? e.touches[0].clientX : curX);
-        let clientY = e.clientY || (e.touches ? e.touches[0].clientY : curY);
-        let moveX = curX - clientX;
-        let moveY = curY - clientY;
-        curX = clientX;
-        curY = clientY;
-        el.style.top = (el.offsetTop - moveY) + "px";
-        el.style.left = (el.offsetLeft - moveX) + "px";
+    function elementDrag(e) {
+        if(e.cancelable) e.preventDefault(); 
+        let clientX = (e.type === 'touchmove') ? e.touches[0].clientX : e.clientX;
+        let clientY = (e.type === 'touchmove') ? e.touches[0].clientY : e.clientY;
+        pos1 = pos3 - clientX;
+        pos2 = pos4 - clientY;
+        pos3 = clientX;
+        pos4 = clientY;
+        el.style.top = (el.offsetTop - pos2) + "px";
+        el.style.left = (el.offsetLeft - pos1) + "px";
     }
 
-    function dragEnd() {
+    function closeDragElement() {
         document.onmouseup = null; document.onmousemove = null;
         document.ontouchend = null; document.ontouchmove = null;
     }
@@ -289,19 +321,15 @@ function showNext() {
     document.getElementById("nextBtn").style.display = "block";
     return;
   }
-  
   let n = document.createElement("div");
   n.className = "sticky";
   
-  // Dynamic positioning logic to stack them nicely but allow dragging
-  let x = (10 + (msgIdx * 5)) % 40; 
-  let y = (15 + (msgIdx * 8)) % 35;
+  // Dynamic spread
+  n.style.left = (12 + (msgIdx * 7)) % 55 + "vw";
+  n.style.top = (18 + (msgIdx * 8)) % 45 + "vh";
   
-  n.style.left = x + "vw";
-  n.style.top = y + "vh";
-  let rotation = Math.random() * 12 - 6;
-  n.style.setProperty("--rot", rotation + "deg");
-  n.style.animation = "notePOP 0.8s forwards";
+  let rotValue = (Math.random() * 12 - 6);
+  n.style.setProperty("--rot", rotValue + "deg");
   
   document.body.appendChild(n);
   makeDraggable(n);
@@ -310,36 +338,33 @@ function showNext() {
   function type() {
     if(charIdx < msgs[msgIdx].length) {
       n.innerHTML += msgs[msgIdx][charIdx++];
-      let speed = (msgs[msgIdx][charIdx-1] === '\n') ? 300 : 35;
-      setTimeout(type, speed);
+      setTimeout(type, 10); 
     } else {
       msgIdx++;
-      setTimeout(showNext, 1200);
+      setTimeout(showNext, 400); 
     }
   }
   type();
 }
 
-window.addEventListener('load', () => {
-    setTimeout(showNext, 800);
-});
+window.addEventListener('load', () => setTimeout(showNext, 800));
 
 function startCelebration() {
-    const icons = ["💜", "✨", "🌸", "⭐", "🎉", "💖", "🎂"];
+    const icons = ["💜", "✨", "⭐", "🦄", "💫", "💖"];
     setInterval(() => {
         let p = document.createElement("div");
         p.className = "particle";
         p.innerText = icons[Math.floor(Math.random()*icons.length)];
-        p.style.fontSize = Math.random()*20 + 20 + "px";
+        p.style.fontSize = Math.random()*25 + 20 + "px";
         p.style.left = Math.random()*100+"vw";
         p.style.top = "-50px";
         p.animate([
-            { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
-            { transform: `translateY(110vh) rotate(${Math.random()*720}deg)`, opacity: 0 }
-        ], { duration: 4000 + Math.random()*2000 });
+            { transform: 'translateY(0) rotate(0deg)', opacity: 1 }, 
+            { transform: `translateY(110vh) rotate(${Math.random()*360}deg)`, opacity: 0 }
+        ], { duration: 3000 + Math.random()*2000 });
         document.body.appendChild(p);
-        setTimeout(() => p.remove(), 6000);
-    }, 150);
+        setTimeout(() => p.remove(), 5000);
+    }, 100);
 }
 
 document.getElementById("nextBtn").onclick = function() {
