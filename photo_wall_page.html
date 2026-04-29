@@ -85,7 +85,7 @@ body {
 
 .film-track {
     display: flex;
-    width: max-content; /* Critical for smooth scrolling */
+    width: max-content; 
     animation: scroll 40s linear infinite;
 }
 
@@ -93,7 +93,7 @@ body {
 
 @keyframes scroll {
     0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); } /* Resets halfway through the double-set */
+    100% { transform: translateX(-50%); }
 }
 
 .photo {
@@ -109,7 +109,8 @@ body {
     transition: 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.photo img {
+/* Updated to handle both img and video tags */
+.photo img, .photo video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -270,24 +271,49 @@ body {
 <div class="bottom-lane">
     <button id="gift-btn">CELEBRATE OUR MAGIC ✨</button>
     <div class="sticker-row" id="sticker-container">
-        
-        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dnhnZWRvZzZ4dzhuZWlnaGpvNDdoNW54amowZXhjNjFwZTE2d2F4dSZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/igS7vtu2yeOIHaDCa3/giphy.gif" style="--d: 0.3s">
-        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eXpuOHR1Z3k2djg0YWE1MjR4ODlvYjFnaXc1ZG9ncGd5MG8zdTBpZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/98A6QYUPnNv4zpeGIp/giphy.gif" style="--d: 0.5s">
-        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eXpuOHR1Z3k2djg0YWE1MjR4ODlvYjFnaXc1ZG9ncGd5MG8zdTBpZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/RRtgLyAruCVLJDaZzq/giphy.gif" style="--d: 0.7s">
-        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eXpuOHR1Z3k2djg0YWE1MjR4ODlvYjFnaXc1ZG9ncGd5MG8zdTBpZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/w7eLtyVyDW8fxkdjFe/giphy.gif" style="--d: 0.9s">
-        <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3V5NmxucWthZGxwMTVrbmphZ2lqdzJyOWM4Z24xZDBnZWgzZGd6bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/2ffOPHJ4xYc6mheQoi/giphy.gif" style="--d: 0.9s">
-        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dnhnZWRvZzZ4dzhuZWlnaGpvNDdoNW54amowZXhjNjFwZTE2d2F4dSZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/igS7vtu2yeOIHaDCa3/giphy.gif" style="--d: 0.9s">
-        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eXpuOHR1Z3k2djg0YWE1MjR4ODlvYjFnaXc1ZG9ncGd5MG8zdTBpZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/98A6QYUPnNv4zpeGIp/giphy.gif" style="--d: 0.9s">
-        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eXpuOHR1Z3k2djg0YWE1MjR4ODlvYjFnaXc1ZG9ncGd5MG8zdTBpZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/RRtgLyAruCVLJDaZzq/giphy.gif" style="--d: 0.9s">
-        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eXpuOHR1Z3k2djg0YWE1MjR4ODlvYjFnaXc1ZG9ncGd5MG8zdTBpZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/w7eLtyVyDW8fxkdjFe/giphy.gif" style="--d: 0.9s">
-        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eXpuOHR1Z3k2djg0YWE1MjR4ODlvYjFnaXc1ZG9ncGd5MG8zdTBpZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/VQsIQ6LzyGw17gTgDC/giphy.gif" style="--d: 0.9s">
-        <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExOW42dGcyc3NoZzZ5djNrZGRubnhienVjZTM2M2c0Z3FvaTcxazFkayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/6yGj6iFuMc3lDkyYxW/giphy.gif" style="--d: 0.9s">
-        <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdzVzdmpmc2p5dmRhbXU2YmozY2N4bTZwZ2lrNnQ1OGNqOWRwdHFjaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/BJJFCHjcVJMu6mv4qP/giphy.gif" style="--d: 0.9s">
-        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eXpuOHR1Z3k2djg0YWE1MjR4ODlvYjFnaXc1ZG9ncGd5MG8zdTBpZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/VQsIQ6LzyGw17gTgDC/giphy.gif" style="--d: 0.9s">
-        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NXU3NzFhdW10dXhhZHlhdGYwbTdrNGpoZnBlZjFtOXdzcWJ0cHN4eiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/SpnJFOpgxhh4LFqhau/giphy.gif" style="--d: 0.9s">
-        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NjFkaG90MnZheXFrbDRrZHpmdnRmcjlmcHU3dTN3ZGlnaXQyM250OSZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/3NOrDakyzzMTrpx9Uk/giphy.gif" style="--d: 0.9s">
+       <img src="https://media.giphy.com/media/eeRp2Ywqzp5kTGplzq/giphy.gif">
 
-    </div>
+
+
+<img src="https://giphy.com/stickers/bts-idol-bangtan-4N0qTlYijncdhPXfdC">
+
+<img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3V5NmxucWthZGxwMTVrbmphZ2lqdzJyOWM4Z24xZDBnZWgzZGd6bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/2ffOPHJ4xYc6mheQoi/giphy.gif">
+
+<img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dnhnZWRvZzZ4dzhuZWlnaGpvNDdoNW54amowZXhjNjFwZTE2d2F4dSZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/igS7vtu2yeOIHaDCa3/giphy.gif">
+
+<img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eXpuOHR1Z3k2djg0YWE1MjR4ODlvYjFnaXc1ZG9ncGd5MG8zdTBpZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/98A6QYUPnNv4zpeGIp/giphy.gif">
+
+<img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eXpuOHR1Z3k2djg0YWE1MjR4ODlvYjFnaXc1ZG9ncGd5MG8zdTBpZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/RRtgLyAruCVLJDaZzq/giphy.gif">
+
+<img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eXpuOHR1Z3k2djg0YWE1MjR4ODlvYjFnaXc1ZG9ncGd5MG8zdTBpZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/w7eLtyVyDW8fxkdjFe/giphy.gif">
+
+<img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eXpuOHR1Z3k2djg0YWE1MjR4ODlvYjFnaXc1ZG9ncGd5MG8zdTBpZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/VQsIQ6LzyGw17gTgDC/giphy.gif">
+
+<img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExOW42dGcyc3NoZzZ5djNrZGRubnhienVjZTM2M2c0Z3FvaTcxazFkayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/6yGj6iFuMc3lDkyYxW/giphy.gif">
+
+<img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdzVzdmpmc2p5dmRhbXU2YmozY2N4bTZwZ2lrNnQ1OGNqOWRwdHFjaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/BJJFCHjcVJMu6mv4qP/giphy.gif">
+
+<img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eXpuOHR1Z3k2djg0YWE1MjR4ODlvYjFnaXc1ZG9ncGd5MG8zdTBpZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/VQsIQ6LzyGw17gTgDC/giphy.gif">
+
+<img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NXU3NzFhdW10dXhhZHlhdGYwbTdrNGpoZnBlZjFtOXdzcWJ0cHN4eiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/SpnJFOpgxhh4LFqhau/giphy.gif">
+
+<img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NjFkaG90MnZheXFrbDRrZHpmdnRmcjlmcHU3dTN3ZGlnaXQyM250OSZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/3NOrDakyzzMTrpx9Uk/giphy.gif">
+
+<img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3YTR6eHBrdWt2cHBkaGM5b3dnYXoxOWRzamM4d21ybnNpZTRmdWltayZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/zPsVhL3rdwCLwj9E1Z/giphy.gif">
+
+<img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3bmE5amljNWs5eXFrZmNkM3NxdjljM3BoZzVmNm4xOXB2dmVnZHFlYiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/xiVB19kvingDVGXdxX/giphy.gif">
+
+<img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExODIzb3JzdzlpZnJrZW9mZzNjdjgwcjgyNjM5NDJoamhqdzV0ZzlyZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/zCBrRpn4UO2rLl5Z1g/giphy.gif">
+
+<img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3N3JobXo4NGxvbDY4M2R3eWF3OWF6enNtMXFtdzg1YjBmcWNqOG84eiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/50aeLgKPplVYIqSBA2/giphy.gif">
+
+
+
+
+
+
+
+        </div>
 </div>
 
 <div id="popup-overlay">
@@ -304,25 +330,28 @@ const music = document.getElementById("music");
 const track = document.getElementById("track");
 const popup = document.getElementById("popup-overlay");
 
-// 1. Setup Film Roll - Cleaned up naming and logic
-const images = [
-    "photo1.jpeg", "photo2.jpeg", "photo3.jpeg", "photo4.jpeg", "photo5.jpeg",
-    "photo6.jpeg", "photo7.jpeg", "photo8.jpeg", "photo9.jpeg", "photo10.jpeg",
-    "photo11.jpeg", "photo12.jpeg", "photo13.jpeg", "photo14.jpeg", "photo15.jpeg",
-    "photo16.jpeg", "photo17.jpeg"
+// 1. Setup Media Roll - List photos AND videos here
+const mediaItems = [
+    "photo1.jpeg", "video1.mp4", "photo2.jpeg", "photo3.jpeg", "video2.mp4",
+    "photo4.jpeg", "photo5.jpeg", "photo6.jpeg", "photo7.jpeg", "video3.mp4","photo8.jpeg",
+    "photo9.jpeg", "photo10.jpeg", "photo11.jpeg","video4.mp4", "photo12.jpeg", "photo13.jpeg",
+    "photo14.jpeg", "photo15.jpeg", "photo16.jpeg","video5.mp4", "photo17.jpeg"
 ];
 
 function populateTrack() {
-    // Cloning twice creates the seamless loop (A...B then A...B)
-    // The animation shifts by 50% so when it hits the end of set 2, 
-    // it snaps back to start of set 1 instantly.
-    const combined = [...images, ...images]; 
+    const combined = [...mediaItems, ...mediaItems]; 
     combined.forEach(src => {
         const div = document.createElement('div');
         div.className = 'photo';
         div.style.setProperty('--r', (Math.random() * 8 - 4) + 'deg');
-        // Added lazy loading to prevent browser memory drops
-        div.innerHTML = `<img src="${src}" loading="lazy" alt="Memory">`;
+
+        // VIDEO LOGIC ADDED HERE
+        if (src.toLowerCase().endsWith('.mp4') || src.toLowerCase().endsWith('.mov') || src.toLowerCase().endsWith('.webm')) {
+            div.innerHTML = `<video src="${src}" autoplay muted loop playsinline></video>`;
+        } else {
+            div.innerHTML = `<img src="${src}" loading="lazy" alt="Memory">`;
+        }
+        
         track.appendChild(div);
     });
 }
@@ -370,5 +399,6 @@ function goToNextPage() {
     window.location.href = 'gift.html';
 }
 </script>
+
 </body>
 </html>
