@@ -110,7 +110,7 @@ body {
     to { opacity: 1; transform: scale(1) translateY(0); } 
 }
 
-/* 🎉 NEXT BUTTON */
+/* 🎉 BUTTONS */
 #nextBtn {
   display: none;
   position: fixed;
@@ -133,6 +133,25 @@ body {
   color: #fff;
 }
 
+#exitBtn {
+    margin-top: 30px;
+    padding: 12px 30px;
+    background: transparent;
+    border: 2px solid #bc6ff1;
+    color: #bc6ff1;
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#exitBtn:hover {
+    background: #bc6ff1;
+    color: #fff;
+    box-shadow: 0 0 20px #bc6ff1;
+}
+
 /* 🎁 FINAL POPUP */
 #popup {
   position: fixed;
@@ -150,7 +169,7 @@ body {
   width: 100%;
   max-width: 450px;
   background: linear-gradient(145deg, #13032d, #05010d);
-  padding: 40px 30px;
+  padding: 60px 30px;
   border-radius: 30px;
   text-align: center;
   border: 1px solid rgba(188, 111, 241, 0.3);
@@ -165,20 +184,6 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-/* 🚪 EXIT BUTTON */
-#exitBtn {
-    margin-top: 25px;
-    padding: 12px 30px;
-    background: transparent;
-    border: 2px solid #bc6ff1;
-    color: #bc6ff1;
-    border-radius: 50px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s;
-}
-#exitBtn:hover { background: #bc6ff1; color: #fff; }
-
 .particle {
   position: fixed;
   z-index: 100000;
@@ -189,7 +194,7 @@ body {
 
 <body>
 
-<!-- Tap to Start Overlay -->
+<!-- Tap to Start -->
 <div id="overlay" onclick="initPage()">
   <h1>The Most Important Secret... EVER ✨<br><br>(Tap to Begin)</h1>
 </div>
@@ -206,7 +211,7 @@ body {
       Stay magical, stay weird, and stay gold forever because I’ve already told you too many secrets to let you leave. 🌸🤫<br><br>
       <strong>Happy Birthday Once Again! 🎂</strong>
     </p>
-    <button id="exitBtn">Stay gold, stay happy bro! 💜</button>
+    <button id="exitBtn">Stay gold, stay happy! 💜</button>
   </div>
 </div>
 
@@ -219,6 +224,7 @@ let maxZ = 1500;
 const giftMusic = document.getElementById("giftMusic");
 const bdayMusic = document.getElementById("bdayMusic");
 
+// Initialize Page and play Song 1
 function initPage() {
     document.getElementById("overlay").style.display = "none";
     // Song 1 starts at 62 seconds
@@ -246,29 +252,42 @@ but the path you walk is something truly special. ✨
 देखणी ती पाऊले
 जी ध्यासपंथे चालती ।
 वाळवंटातूनसुद्धा
-स्वस्तिपद्मे रेखिती ॥`,
+स्वस्तिपद्मे रेखिती ॥
+
+Some steps don’t just carry you...
+they leave a trail of magic behind for others to follow. 💫`,
 
 `I didn’t just pick out a bracelet for you… ✨💖
-I wanted to wrap a little bit of sparkle around your wrist.
+I wanted to wrap a little bit of sparkle around your wrist,
+simply because your touch makes everything better.
 
 देखणे ते हात ज्यांना
 निर्मितीचे डोहळे ।
 मंगलाने गंधलेले
-सुंदराचे सोहळे ॥`,
+सुंदराचे सोहळे ॥
+
+Let this shine remind you every day…
+your hands aren’t just beautiful—they are capable of creating wonders. 💫`,
 
 `This dress 👗💖 is just a small addition to your wardrobe,
-because the real elegance? That’s already yours. ✨
+because the real elegance? That’s already yours by nature. ✨
 
 देखणे ते चेहरे
 जे प्रांजळाचे आरसे ।
 गोरटे की सावळे
-या मोल नाही फारसे ॥`,
+या मोल नाही फारसे ॥
+
+True beauty isn't something you put on; 
+it's the mirror of your soul that shines through every time you smile. 💫`,
 
 `A little style for your eyes 🕶️💖
-to match the depth you carry within them. 
+to match the depth and kindness you carry within them. 
 
 तेच डोळे देखणे
-जे कोंडीती सार्‍या नभा ।`,
+जे कोंडीती सार्‍या नभा ।
+
+Some eyes don’t just look at the world…
+they feel it, they heal it, and they carry the whole sky within them. ✨`,
 
 `I picked these flowers 💐💖
 thinking of the peace and calm you bring wherever you go. ✨
@@ -276,10 +295,16 @@ thinking of the peace and calm you bring wherever you go. ✨
 देखणी ती जीवने
 जी तृप्तीची तीर्थोदके ।
 चांदणे ज्यातून वाहे
-शुभ्र पार्‍यासारखे ॥`,
+शुभ्र पार्‍यासारखे ॥
+
+You are one of those rare people who make life feel softer,
+spreading light just like the moonlight on a quiet night. 🌸`,
 
 `Finally, 🎁
-Gifts are just objects, but the person you are? That is permanent.
+Gifts are just objects, and they might fade with time...
+But the person you are? That is permanent.
+
+You are something truly, deeply special. 💖✨
 Thank you for being in my life. Never forget your worth. 🌸`
 ];
 
@@ -310,8 +335,8 @@ function showNext() {
   }
   let n = document.createElement("div");
   n.className = "sticky";
-  n.style.left = (10 + Math.random() * 40) + "vw";
-  n.style.top = (20 + Math.random() * 30) + "vh";
+  n.style.left = (10 + Math.random() * 50) + "vw";
+  n.style.top = (15 + Math.random() * 40) + "vh";
   let rotValue = (Math.random() * 10 - 5);
   n.style.setProperty("--rot", rotValue + "deg");
   document.body.appendChild(n);
@@ -319,7 +344,7 @@ function showNext() {
   let charIdx = 0;
   function type() {
     if(charIdx < msgs[msgIdx].length) { n.innerHTML += msgs[msgIdx][charIdx++]; setTimeout(type, 15); }
-    else { msgIdx++; setTimeout(showNext, 1200); }
+    else { msgIdx++; setTimeout(showNext, 800); }
   }
   type();
 }
@@ -330,31 +355,45 @@ function startCelebration() {
         let p = document.createElement("div");
         p.className = "particle"; p.innerText = icons[Math.floor(Math.random()*icons.length)];
         p.style.fontSize = Math.random()*25 + 20 + "px"; p.style.left = Math.random()*100+"vw"; p.style.top = "-50px";
-        p.animate([{ transform: 'translateY(0)', opacity: 1 }, { transform: `translateY(110vh) rotate(360deg)`, opacity: 0 }], { duration: 3000 + Math.random()*2000 });
+        p.animate([{ transform: 'translateY(0) rotate(0deg)', opacity: 1 }, { transform: `translateY(110vh) rotate(${Math.random()*360}deg)`, opacity: 0 }], { duration: 3000 + Math.random()*2000 });
         document.body.appendChild(p); setTimeout(() => p.remove(), 5000);
     }, 100);
 }
 
-// Reveal Secret Click
+// Button Click: Switch Music and Show Popup
 document.getElementById("nextBtn").onclick = function() {
   this.style.display = "none";
-  giftMusic.pause();
-  // Song 2 starts at 1min 30sec (90 seconds)
+  giftMusic.pause(); 
+  // Song 2 starts at 1 minute 30 seconds (90 seconds)
   bdayMusic.currentTime = 90;
   bdayMusic.play();  
   document.getElementById("popup").style.display = "flex";
   startCelebration();
 };
 
-// Exit Functionality
+// Exit Functionality (Optimized for GitHub Pages)
 document.getElementById("exitBtn").onclick = function() {
     bdayMusic.pause();
-    document.body.innerHTML = `
-        <div style="background:#05010d; height:100vh; display:flex; justify-content:center; align-items:center; color:#bc6ff1; font-family:'Dancing Script', cursive; font-size:35px; text-align:center; padding:20px;">
-            Stay Gold Forever... 💜✨<br>
-        </div>
-    `;
-    setTimeout(() => window.close(), 3000);
+    giftMusic.pause();
+    
+    // Page fade out and show final message
+    document.body.style.transition = "opacity 1s ease";
+    document.body.style.opacity = "0";
+    
+    setTimeout(() => {
+        document.body.innerHTML = `
+            <div style="background:#05010d; height:100vh; width:100vw; display:flex; justify-content:center; align-items:center; color:#bc6ff1; font-family:'Dancing Script', cursive; font-size:35px; text-align:center; padding:20px; position:fixed; top:0; left:0;">
+                Stay Gold Forever... 💜✨<br>
+                (You can close this tab now)
+            </div>
+        `;
+        document.body.style.opacity = "1";
+    }, 1000);
+    
+    // Try to close tab after a delay
+    setTimeout(() => {
+        window.close();
+    }, 3000);
 };
 </script>
 </body>
