@@ -19,9 +19,35 @@ body {
   height: 100vh;
   width: 100vw;
   font-family: 'Poppins', sans-serif;
-  background: #05010d; /* Deep Space Black */
+  background: #05010d;
   background: radial-gradient(circle at center, #1a083d 0%, #05010d 100%);
   color: #fff;
+}
+
+/* 🌌 START OVERLAY - Force Tap */
+#overlay {
+  position: fixed;
+  inset: 0;
+  background: #05010d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  text-align: center;
+  cursor: pointer;
+}
+
+#overlay h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 32px;
+  color: #bc6ff1;
+  text-shadow: 0 0 10px #bc6ff1;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
 }
 
 /* 🌌 NEON GALAXY TITLE */
@@ -55,13 +81,11 @@ body {
   min-height: 220px;
   max-height: 70vh;
   padding: 30px;
-  /* Glassmorphism with Iridescent Border */
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  
   font-size: clamp(15px, 4.2vw, 17px);
   line-height: 1.8;
   color: #e0e0e0;
@@ -72,8 +96,6 @@ body {
   white-space: pre-line;
   scrollbar-width: none;
   user-select: none;
-  
-  /* Constant Floating Animation */
   animation: notePOP 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, 
              float 4s ease-in-out infinite alternate;
 }
@@ -83,24 +105,12 @@ body {
   to { transform: translateY(-10px) rotate(var(--rot)); }
 }
 
-.sticky:active {
-  cursor: grabbing;
-  border: 1px solid rgba(188, 111, 241, 0.5);
-  box-shadow: 0 0 30px rgba(188, 111, 241, 0.3);
-}
-
 @keyframes notePOP { 
     from { opacity: 0; transform: scale(0.8) translateY(30px); } 
     to { opacity: 1; transform: scale(1) translateY(0); } 
 }
 
-/* ✨ NEON GLOW TEXT FOR MARATHI */
-.highlight-text {
-  color: #bc6ff1;
-  text-shadow: 0 0 5px rgba(188, 111, 241, 0.5);
-}
-
-/* 🎉 CYBER-PURPLE BUTTON */
+/* 🎉 BUTTON */
 #nextBtn {
   display: none;
   position: fixed;
@@ -114,9 +124,6 @@ body {
   border-radius: 10px;
   color: #bc6ff1;
   cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  box-shadow: 0 0 15px rgba(188, 111, 241, 0.4);
   z-index: 2000;
   transition: 0.3s;
 }
@@ -124,10 +131,9 @@ body {
 #nextBtn:hover {
   background: #bc6ff1;
   color: #fff;
-  box-shadow: 0 0 40px #bc6ff1;
 }
 
-/* 🎁 FINAL POPUP - DARK LUXE */
+/* 🎁 FINAL POPUP */
 #popup {
   position: fixed;
   inset: 0;
@@ -148,7 +154,6 @@ body {
   border-radius: 30px;
   text-align: center;
   border: 1px solid rgba(188, 111, 241, 0.3);
-  box-shadow: 0 0 100px rgba(188, 111, 241, 0.2);
 }
 
 #popupBox h2 { 
@@ -160,8 +165,6 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-#popupBox p { font-size: 17px; color: #b0b0b0; line-height: 1.8; }
-
 .particle {
   position: fixed;
   z-index: 100000;
@@ -171,6 +174,11 @@ body {
 </head>
 
 <body>
+
+<!-- Tap to Start -->
+<div id="overlay" onclick="initPage()">
+  <h1>Lets See what is from you ?????? ✨<br><br>(Tap to Begin)</h1>
+</div>
 
 <div id="title">For the girl who deserves the whole galaxy 💛</div>
 <button id="nextBtn">Reveal Final Secret ✨</button>
@@ -187,15 +195,22 @@ body {
   </div>
 </div>
 
-<audio id="music" loop><source src="music3.mpeg"></audio>
+<!-- Audio Files -->
+<audio id="giftMusic" loop><source src="gift.mpeg" type="audio/mpeg"></audio>
+<audio id="bdayMusic" loop><source src="final.mpeg" type="audio/mpeg"></audio>
 
 <script>
 let maxZ = 1500;
+const giftMusic = document.getElementById("giftMusic");
+const bdayMusic = document.getElementById("bdayMusic");
 
-document.addEventListener("click", () => { 
-    const audio = document.getElementById("music");
-    audio.play().catch(() => {}); 
-}, {once:true});
+// Initialize Page and play Song 1
+function initPage() {
+    document.getElementById("overlay").style.display = "none";
+    giftMusic.currentTime = 50;
+    giftMusic.play().catch(e => console.log(e));
+    setTimeout(showNext, 800);
+}
 
 // Galaxy Generation
 for(let i=0; i<150; i++){
@@ -209,12 +224,10 @@ for(let i=0; i<150; i++){
   document.body.appendChild(s);
 }
 
-// Your exact messages
 const msgs = [
 `These shoes 👟💖 are just a small gift,
 but the path you walk is something truly special. ✨
 
-As you move forward, always remember:
 देखणी ती पाऊले
 जी ध्यासपंथे चालती ।
 वाळवंटातूनसुद्धा
@@ -274,43 +287,24 @@ You are something truly, deeply special. 💖✨
 Thank you for being in my life. Never forget your worth. 🌸`
 ];
 
+// ... (Drag functions and Typing logic remains same) ...
 function makeDraggable(el) {
     let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-    el.onmousedown = dragMouseDown;
-    el.ontouchstart = dragMouseDown;
-
+    el.onmousedown = dragMouseDown; el.ontouchstart = dragMouseDown;
     function dragMouseDown(e) {
-        maxZ++;
-        el.style.zIndex = maxZ;
-        if (e.type === 'touchstart') {
-            pos3 = e.touches[0].clientX;
-            pos4 = e.touches[0].clientY;
-        } else {
-            pos3 = e.clientX;
-            pos4 = e.clientY;
-        }
-        document.onmouseup = closeDragElement;
-        document.ontouchend = closeDragElement;
-        document.onmousemove = elementDrag;
-        document.ontouchmove = elementDrag;
+        maxZ++; el.style.zIndex = maxZ;
+        if (e.type === 'touchstart') { pos3 = e.touches[0].clientX; pos4 = e.touches[0].clientY; }
+        else { pos3 = e.clientX; pos4 = e.clientY; }
+        document.onmouseup = closeDragElement; document.ontouchend = closeDragElement;
+        document.onmousemove = elementDrag; document.ontouchmove = elementDrag;
     }
-
     function elementDrag(e) {
-        if(e.cancelable) e.preventDefault(); 
         let clientX = (e.type === 'touchmove') ? e.touches[0].clientX : e.clientX;
         let clientY = (e.type === 'touchmove') ? e.touches[0].clientY : e.clientY;
-        pos1 = pos3 - clientX;
-        pos2 = pos4 - clientY;
-        pos3 = clientX;
-        pos4 = clientY;
-        el.style.top = (el.offsetTop - pos2) + "px";
-        el.style.left = (el.offsetLeft - pos1) + "px";
+        pos1 = pos3 - clientX; pos2 = pos4 - clientY; pos3 = clientX; pos4 = clientY;
+        el.style.top = (el.offsetTop - pos2) + "px"; el.style.left = (el.offsetLeft - pos1) + "px";
     }
-
-    function closeDragElement() {
-        document.onmouseup = null; document.onmousemove = null;
-        document.ontouchend = null; document.ontouchmove = null;
-    }
+    function closeDragElement() { document.onmouseup = null; document.onmousemove = null; document.ontouchend = null; document.ontouchmove = null; }
 }
 
 let msgIdx = 0;
@@ -321,52 +315,36 @@ function showNext() {
   }
   let n = document.createElement("div");
   n.className = "sticky";
-  
-  // Dynamic spread
-  n.style.left = (12 + (msgIdx * 7)) % 55 + "vw";
-  n.style.top = (18 + (msgIdx * 8)) % 45 + "vh";
-  
-  let rotValue = (Math.random() * 12 - 6);
+  n.style.left = (10 + Math.random() * 50) + "vw";
+  n.style.top = (15 + Math.random() * 40) + "vh";
+  let rotValue = (Math.random() * 10 - 5);
   n.style.setProperty("--rot", rotValue + "deg");
-  
   document.body.appendChild(n);
   makeDraggable(n);
-  
   let charIdx = 0;
   function type() {
-    if(charIdx < msgs[msgIdx].length) {
-      n.innerHTML += msgs[msgIdx][charIdx++];
-      setTimeout(type, 10); 
-    } else {
-      msgIdx++;
-      setTimeout(showNext, 400); 
-    }
+    if(charIdx < msgs[msgIdx].length) { n.innerHTML += msgs[msgIdx][charIdx++]; setTimeout(type, 15); }
+    else { msgIdx++; setTimeout(showNext, 800); }
   }
   type();
 }
 
-window.addEventListener('load', () => setTimeout(showNext, 800));
-
 function startCelebration() {
-    const icons = ["💜", "✨", "⭐", "🦄", "💫", "💖"];
+    const icons = ["💜", "✨", "⭐", "💫", "", "🌸"];
     setInterval(() => {
         let p = document.createElement("div");
-        p.className = "particle";
-        p.innerText = icons[Math.floor(Math.random()*icons.length)];
-        p.style.fontSize = Math.random()*25 + 20 + "px";
-        p.style.left = Math.random()*100+"vw";
-        p.style.top = "-50px";
-        p.animate([
-            { transform: 'translateY(0) rotate(0deg)', opacity: 1 }, 
-            { transform: `translateY(110vh) rotate(${Math.random()*360}deg)`, opacity: 0 }
-        ], { duration: 3000 + Math.random()*2000 });
-        document.body.appendChild(p);
-        setTimeout(() => p.remove(), 5000);
+        p.className = "particle"; p.innerText = icons[Math.floor(Math.random()*icons.length)];
+        p.style.fontSize = Math.random()*25 + 20 + "px"; p.style.left = Math.random()*100+"vw"; p.style.top = "-50px";
+        p.animate([{ transform: 'translateY(0) rotate(0deg)', opacity: 1 }, { transform: `translateY(110vh) rotate(${Math.random()*360}deg)`, opacity: 0 }], { duration: 3000 + Math.random()*2000 });
+        document.body.appendChild(p); setTimeout(() => p.remove(), 5000);
     }, 100);
 }
 
+// Button Click: Switch Music and Show Popup
 document.getElementById("nextBtn").onclick = function() {
   this.style.display = "none";
+  giftMusic.pause(); // Stop Thousand Years
+  bdayMusic.play();  // Start Birthday Song
   document.getElementById("popup").style.display = "flex";
   startCelebration();
 };
