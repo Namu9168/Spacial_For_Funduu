@@ -110,7 +110,7 @@ body {
     to { opacity: 1; transform: scale(1) translateY(0); } 
 }
 
-/* 🎉 BUTTON */
+/* 🎉 NEXT BUTTON */
 #nextBtn {
   display: none;
   position: fixed;
@@ -150,7 +150,7 @@ body {
   width: 100%;
   max-width: 450px;
   background: linear-gradient(145deg, #13032d, #05010d);
-  padding: 60px 30px;
+  padding: 40px 30px;
   border-radius: 30px;
   text-align: center;
   border: 1px solid rgba(188, 111, 241, 0.3);
@@ -165,6 +165,20 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+/* 🚪 EXIT BUTTON */
+#exitBtn {
+    margin-top: 25px;
+    padding: 12px 30px;
+    background: transparent;
+    border: 2px solid #bc6ff1;
+    color: #bc6ff1;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+#exitBtn:hover { background: #bc6ff1; color: #fff; }
+
 .particle {
   position: fixed;
   z-index: 100000;
@@ -175,7 +189,7 @@ body {
 
 <body>
 
-<!-- Tap to Start -->
+<!-- Tap to Start Overlay -->
 <div id="overlay" onclick="initPage()">
   <h1>The Most Important Secret... EVER ✨<br><br>(Tap to Begin)</h1>
 </div>
@@ -185,13 +199,14 @@ body {
 
 <div id="popup">
   <div id="popupBox">
-    <h2>🎉 Happy Birthday Poohhhhh 💛</h2>
+    <h2>🎉 Happy Birthday Poohhhhh 💜</h2>
     <p>
       I checked the receipt for our friendship and it says "No Returns," so I guess you’re stuck with me and my questionable life choices forever. 🧾😜<br><br>
       "Thanks for being the only person who hears my nonsense and thinks🎧 You’re the only one I actually listen to (mostly because you’re loud 😜 and always right), and honestly, you're the only person allowed to call me out on my drama. You're my favorite human and my permanent safe house! 🏠💥"<br><br>
-      Stay magical, stay weird, and stay forever because I’ve already told you too many secrets to let you leave. 🌸🤫<br><br>
+      Stay magical, stay weird, and stay gold forever because I’ve already told you too many secrets to let you leave. 🌸🤫<br><br>
       <strong>Happy Birthday Once Again! 🎂</strong>
     </p>
+    <button id="exitBtn">Stay gold, stay happy bro! 💜</button>
   </div>
 </div>
 
@@ -204,9 +219,9 @@ let maxZ = 1500;
 const giftMusic = document.getElementById("giftMusic");
 const bdayMusic = document.getElementById("bdayMusic");
 
-// Initialize Page and play Song 1
 function initPage() {
     document.getElementById("overlay").style.display = "none";
+    // Song 1 starts at 62 seconds
     giftMusic.currentTime = 62;
     giftMusic.play().catch(e => console.log(e));
     setTimeout(showNext, 800);
@@ -231,42 +246,29 @@ but the path you walk is something truly special. ✨
 देखणी ती पाऊले
 जी ध्यासपंथे चालती ।
 वाळवंटातूनसुद्धा
-स्वस्तिपद्मे रेखिती ॥
-
-Some steps don’t just carry you...
-they leave a trail of magic behind for others to follow. 💫`,
+स्वस्तिपद्मे रेखिती ॥`,
 
 `I didn’t just pick out a bracelet for you… ✨💖
-I wanted to wrap a little bit of sparkle around your wrist,
-simply because your touch makes everything better.
+I wanted to wrap a little bit of sparkle around your wrist.
 
 देखणे ते हात ज्यांना
 निर्मितीचे डोहळे ।
 मंगलाने गंधलेले
-सुंदराचे सोहळे ॥
-
-Let this shine remind you every day…
-your hands aren’t just beautiful—they are capable of creating wonders. 💫`,
+सुंदराचे सोहळे ॥`,
 
 `This dress 👗💖 is just a small addition to your wardrobe,
-because the real elegance? That’s already yours by nature. ✨
+because the real elegance? That’s already yours. ✨
 
 देखणे ते चेहरे
 जे प्रांजळाचे आरसे ।
 गोरटे की सावळे
-या मोल नाही फारसे ॥
-
-True beauty isn't something you put on; 
-it's the mirror of your soul that shines through every time you smile. 💫`,
+या मोल नाही फारसे ॥`,
 
 `A little style for your eyes 🕶️💖
-to match the depth and kindness you carry within them. 
+to match the depth you carry within them. 
 
 तेच डोळे देखणे
-जे कोंडीती सार्‍या नभा ।
-
-Some eyes don’t just look at the world…
-they feel it, they heal it, and they carry the whole sky within them. ✨`,
+जे कोंडीती सार्‍या नभा ।`,
 
 `I picked these flowers 💐💖
 thinking of the peace and calm you bring wherever you go. ✨
@@ -274,20 +276,13 @@ thinking of the peace and calm you bring wherever you go. ✨
 देखणी ती जीवने
 जी तृप्तीची तीर्थोदके ।
 चांदणे ज्यातून वाहे
-शुभ्र पार्‍यासारखे ॥
-
-You are one of those rare people who make life feel softer,
-spreading light just like the moonlight on a quiet night. 🌸`,
+शुभ्र पार्‍यासारखे ॥`,
 
 `Finally, 🎁
-Gifts are just objects, and they might fade with time...
-But the person you are? That is permanent.
-
-You are something truly, deeply special. 💖✨
+Gifts are just objects, but the person you are? That is permanent.
 Thank you for being in my life. Never forget your worth. 🌸`
 ];
 
-// ... (Drag functions and Typing logic remains same) ...
 function makeDraggable(el) {
     let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     el.onmousedown = dragMouseDown; el.ontouchstart = dragMouseDown;
@@ -315,8 +310,8 @@ function showNext() {
   }
   let n = document.createElement("div");
   n.className = "sticky";
-  n.style.left = (10 + Math.random() * 50) + "vw";
-  n.style.top = (15 + Math.random() * 40) + "vh";
+  n.style.left = (10 + Math.random() * 40) + "vw";
+  n.style.top = (20 + Math.random() * 30) + "vh";
   let rotValue = (Math.random() * 10 - 5);
   n.style.setProperty("--rot", rotValue + "deg");
   document.body.appendChild(n);
@@ -324,29 +319,42 @@ function showNext() {
   let charIdx = 0;
   function type() {
     if(charIdx < msgs[msgIdx].length) { n.innerHTML += msgs[msgIdx][charIdx++]; setTimeout(type, 15); }
-    else { msgIdx++; setTimeout(showNext, 800); }
+    else { msgIdx++; setTimeout(showNext, 1200); }
   }
   type();
 }
 
 function startCelebration() {
-    const icons = ["💜", "✨", "⭐", "💫", "", "🌸"];
+    const icons = ["💜", "✨", "⭐", "💫", "💖", "🌸", "😜"];
     setInterval(() => {
         let p = document.createElement("div");
         p.className = "particle"; p.innerText = icons[Math.floor(Math.random()*icons.length)];
         p.style.fontSize = Math.random()*25 + 20 + "px"; p.style.left = Math.random()*100+"vw"; p.style.top = "-50px";
-        p.animate([{ transform: 'translateY(0) rotate(0deg)', opacity: 1 }, { transform: `translateY(110vh) rotate(${Math.random()*360}deg)`, opacity: 0 }], { duration: 3000 + Math.random()*2000 });
+        p.animate([{ transform: 'translateY(0)', opacity: 1 }, { transform: `translateY(110vh) rotate(360deg)`, opacity: 0 }], { duration: 3000 + Math.random()*2000 });
         document.body.appendChild(p); setTimeout(() => p.remove(), 5000);
     }, 100);
 }
 
-// Button Click: Switch Music and Show Popup
+// Reveal Secret Click
 document.getElementById("nextBtn").onclick = function() {
   this.style.display = "none";
-  giftMusic.pause(); // Stop Thousand Years
-  bdayMusic.play();  // Start Birthday Song
+  giftMusic.pause();
+  // Song 2 starts at 1min 30sec (90 seconds)
+  bdayMusic.currentTime = 90;
+  bdayMusic.play();  
   document.getElementById("popup").style.display = "flex";
   startCelebration();
+};
+
+// Exit Functionality
+document.getElementById("exitBtn").onclick = function() {
+    bdayMusic.pause();
+    document.body.innerHTML = `
+        <div style="background:#05010d; height:100vh; display:flex; justify-content:center; align-items:center; color:#bc6ff1; font-family:'Dancing Script', cursive; font-size:35px; text-align:center; padding:20px;">
+            Stay Gold Forever... 💜✨<br>I Purple You!
+        </div>
+    `;
+    setTimeout(() => window.close(), 3000);
 };
 </script>
 </body>
